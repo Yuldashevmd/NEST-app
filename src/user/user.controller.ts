@@ -7,6 +7,8 @@ import {
   Patch,
   Delete,
   ParseIntPipe,
+  Query,
+  Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,12 +18,12 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() dto: CreateUserDto) {
-    return this.userService.create(dto);
+  async create(@Body() dto: CreateUserDto): Promise<any> {
+    return await this.userService.create(dto);
   }
 
   @Get()
-  findAll() {
+  findAll(@Query() query: any) {
     return this.userService.findAll();
   }
 
@@ -30,7 +32,7 @@ export class UserController {
     return this.userService.findOne(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: Partial<CreateUserDto>,

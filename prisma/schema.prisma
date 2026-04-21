@@ -1,5 +1,7 @@
 generator client {
   provider = "prisma-client-js"
+  output = "../prisma/generated"
+  moduleFormat="cjs"
 }
 
 datasource db {
@@ -9,6 +11,21 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   name      String
-  email     String   @unique
+  email     String  @unique()
   createdAt DateTime @default(now())
+  classes UserClass[]
+}
+
+model Class {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(50)
+  users UserClass[]
+}
+
+model UserClass {
+  id Int @id @default(autoincrement())
+  class Class @relation(fields: [classId], references: [id])
+  classId Int
+  user User @relation(fields: [userId], references: [id])
+  userId Int
 }

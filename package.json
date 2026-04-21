@@ -5,6 +5,13 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "imports": {
+    "#prisma-client": {
+      "types": "./prisma/generated/index.d.ts",
+      "require": "./prisma/generated/index.js",
+      "default": "./prisma/generated/index.js"
+    }
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -39,7 +46,7 @@
     "@nestjs/testing": "^11.0.1",
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.10.7",
+    "@types/node": "^22.19.17",
     "@types/supertest": "^6.0.2",
     "dotenv": "^17.3.1",
     "eslint": "^9.18.0",
