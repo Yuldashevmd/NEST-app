@@ -6,26 +6,33 @@ import { CreateUserDto } from './dto/create-user.dto';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  create(data: CreateUserDto) {
-    return this.prisma.user.create({ data });
+  async create(data: CreateUserDto) {
+    return await this.prisma.user.create({ data });
   }
 
-  findAll() {
-    return this.prisma.user.findMany();
+  async users(query: { name: string }) {
+    return await this.prisma.user.findMany({
+      where: {
+        name: {
+          contains: query.name,
+          mode: 'insensitive',
+        },
+      },
+    });
   }
 
-  findOne(id: number) {
-    return this.prisma.user.findUnique({ where: { id } });
+  async user(id: number) {
+    return await this.prisma.user.findUnique({ where: { id } });
   }
 
-  update(id: number, data: Partial<CreateUserDto>) {
-    return this.prisma.user.update({
+  async update(id: number, data: Partial<CreateUserDto>) {
+    return await this.prisma.user.update({
       where: { id },
       data,
     });
   }
 
-  remove(id: number) {
-    return this.prisma.user.delete({ where: { id } });
+  async remove(id: number) {
+    return await this.prisma.user.delete({ where: { id } });
   }
 }

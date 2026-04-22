@@ -4,7 +4,6 @@ import {
   Post,
   Body,
   Param,
-  Patch,
   Delete,
   ParseIntPipe,
   Query,
@@ -12,36 +11,37 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { ReadUserDto } from './dto/read.users.dto';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(@Body() dto: CreateUserDto): Promise<any> {
+  async create(@Body() dto: CreateUserDto): Promise<ReadUserDto> {
     return await this.userService.create(dto);
   }
 
   @Get()
-  findAll(@Query() query: any) {
-    return this.userService.findAll();
+  async users(@Query() query: { name: string }): Promise<ReadUserDto[]> {
+    return await this.userService.users(query);
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.findOne(id);
+  async user(@Param('id', ParseIntPipe) id: number) {
+    return await this.userService.user(id);
   }
 
   @Put(':id')
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: Partial<CreateUserDto>,
   ) {
-    return this.userService.update(id, dto);
+    return await this.userService.update(id, dto);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await this.userService.remove(id);
   }
 }
