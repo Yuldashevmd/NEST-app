@@ -11,14 +11,15 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { ReadUserDto } from './dto/read.users.dto';
+import { ReadUserDto } from './dto/read-users.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(@Body() dto: CreateUserDto): Promise<ReadUserDto> {
+  async create(@Body() dto: CreateUserDto): Promise<string> {
     return await this.userService.create(dto);
   }
 
@@ -35,13 +36,13 @@ export class UserController {
   @Put(':id')
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: Partial<CreateUserDto>,
-  ) {
+    @Body() dto: UpdateUserDto,
+  ): Promise<string> {
     return await this.userService.update(id, dto);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async remove(@Param('id', ParseIntPipe) id: number): Promise<string> {
     return await this.userService.remove(id);
   }
 }

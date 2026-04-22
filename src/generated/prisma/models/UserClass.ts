@@ -222,6 +222,7 @@ export type UserClassOrderByWithRelationInput = {
 
 export type UserClassWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  userId_classId?: Prisma.UserClassUserIdClassIdCompoundUniqueInput
   AND?: Prisma.UserClassWhereInput | Prisma.UserClassWhereInput[]
   OR?: Prisma.UserClassWhereInput[]
   NOT?: Prisma.UserClassWhereInput | Prisma.UserClassWhereInput[]
@@ -229,7 +230,7 @@ export type UserClassWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.IntFilter<"UserClass"> | number
   class?: Prisma.XOR<Prisma.ClassScalarRelationFilter, Prisma.ClassWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "userId_classId">
 
 export type UserClassOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -297,6 +298,11 @@ export type UserClassListRelationFilter = {
 
 export type UserClassOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type UserClassUserIdClassIdCompoundUniqueInput = {
+  userId: number
+  classId: number
 }
 
 export type UserClassCountOrderByAggregateInput = {

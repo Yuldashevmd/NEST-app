@@ -6,33 +6,85 @@ import { CreateUserDto } from './dto/create-user.dto';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateUserDto) {
-    return await this.prisma.user.create({ data });
+  async create(data: CreateUserDto): Promise<string> {
+    await this.prisma.user.create({
+      data: {
+        name: data.name,
+        email: data.email,
+        classes: data.classIds?.length
+          ? {
+              create: data.classIds.map((classId) => ({
+                class: { connect: { id: classId } },
+              })),
+            }
+          : undefined,
+      },
+      include: { classes: { include: { class: true } } },
+    });
+
+    return 'Sucessfully created';
   }
 
   async users(query: { name: string }) {
-    return await this.prisma.user.findMany({
+    const users = await this.prisma.user.findMany({
       where: {
         name: {
           contains: query.name,
           mode: 'insensitive',
         },
       },
+      include: {
+        classes: {
+          include: {
+            class: {
+              select: {
+                id: true,
+                title: true,
+              },
+            },
+          },
+        },
+      },
     });
+
+    return users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      classes: user.classes.map((item) => item.class),
+    }));
   }
 
   async user(id: number) {
     return await this.prisma.user.findUnique({ where: { id } });
   }
 
-  async update(id: number, data: Partial<CreateUserDto>) {
-    return await this.prisma.user.update({
+  async update(id: number, data: Partial<CreateUserDto>): Promise<string> {
+    await this.prisma.user.update({
       where: { id },
-      data,
+      data: {
+        name: data.name,
+        email: data.email,
+        ...(data.classIds
+          ? {
+              classes: {
+                deleteMany: {},
+                create: data.classIds.map((classId) => ({
+                  class: {
+                    connect: { id: classId },
+                  },
+                })),
+              },
+            }
+          : {}),
+      },
     });
+    return 'Sucessfully updated';
   }
 
-  async remove(id: number) {
-    return await this.prisma.user.delete({ where: { id } });
+  async remove(id: number): Promise<string> {
+    await this.prisma.user.delete({ where: { id } });
+    return 'Sucessfully deleted';
   }
 }

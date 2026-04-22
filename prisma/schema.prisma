@@ -24,8 +24,10 @@ model Class {
 
 model UserClass {
   id Int @id @default(autoincrement())
-  class Class @relation(fields: [classId], references: [id])
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
   classId Int
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
+
+  @@unique([userId, classId])
 }
