@@ -18,7 +18,7 @@ export class ClassController {
   constructor(private readonly classService: ClassService) {}
 
   @Post()
-  async create(@Body() createClassDto: CreateClassDto) {
+  async create(@Body() createClassDto: CreateClassDto): Promise<string> {
     return await this.classService.create(createClassDto);
   }
 

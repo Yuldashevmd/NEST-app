@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateClassDto } from './dto/create-class.dto';
-import { UpdateClassDto } from './dto/update-class.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ReadClassDto } from './dto/read-class.dto';
 
@@ -8,26 +7,69 @@ import { ReadClassDto } from './dto/read-class.dto';
 export class ClassService {
   constructor(private readonly prisma: PrismaService) {}
   async create(data: CreateClassDto): Promise<string> {
-    await this.prisma.class.create({ data });
-    return 'Sucessfully created';
+    await this.prisma.class.create({
+      data: {
+        title: data.title,
+        users: data.userIds?.length
+          ? {
+              create: data.userIds.map((userId) => ({
+                user: {
+                  connect: { id: userId },
+                },
+              })),
+            }
+          : undefined,
+      },
+    });
+
+    return 'Successfully created';
   }
 
   async classes(query: { title?: string }): Promise<ReadClassDto[]> {
-    return await this.prisma.class.findMany({
+    const classes = await this.prisma.class.findMany({
       where: { title: { contains: query.title, mode: 'insensitive' } },
+      include: {
+        users: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
     });
+    return classes.map((item) => ({
+      ...item,
+      users: item.users.map((user) => user.user),
+    }));
   }
 
   async class(id: number): Promise<ReadClassDto | null> {
     return await this.prisma.class.findUnique({ where: { id } });
   }
 
-  async update(id: number, updateClassDto: UpdateClassDto): Promise<string> {
+  async update(id: number, data: Partial<CreateClassDto>): Promise<string> {
     await this.prisma.class.update({
       where: { id },
-      data: updateClassDto,
+      data: {
+        ...(data.title !== undefined && { title: data.title }),
+        ...(data.userIds !== undefined && {
+          users: {
+            deleteMany: {},
+            create: data.userIds.map((userId) => ({
+              user: {
+                connect: { id: userId },
+              },
+            })),
+          },
+        }),
+      },
     });
-    return 'Sucessfully updated';
+
+    return 'Successfully updated';
   }
 
   async remove(id: number): Promise<string> {
