@@ -11,33 +11,37 @@ import {
 import { ClassService } from './class.service';
 import { CreateClassDto } from './dto/create-class.dto';
 import { UpdateClassDto } from './dto/update-class.dto';
+import { ReadClassDto } from './dto/read-class.dto';
 
 @Controller('class')
 export class ClassController {
   constructor(private readonly classService: ClassService) {}
 
   @Post()
-  create(@Body() createClassDto: CreateClassDto) {
-    return this.classService.create(createClassDto);
+  async create(@Body() createClassDto: CreateClassDto) {
+    return await this.classService.create(createClassDto);
   }
 
   @Get()
-  async classes(@Query() query: { title: string }) {
+  async classes(@Query() query: { title: string }): Promise<ReadClassDto[]> {
     return await this.classService.classes(query);
   }
 
   @Get(':id')
-  class(@Param('id') id: string) {
-    return this.classService.findOne(+id);
+  async class(@Param('id') id: string): Promise<ReadClassDto | null> {
+    return await this.classService.class(+id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateClassDto: UpdateClassDto) {
-    return this.classService.update(+id, updateClassDto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateClassDto: UpdateClassDto,
+  ): Promise<string> {
+    return await this.classService.update(+id, updateClassDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<string> {
     return this.classService.remove(+id);
   }
 }
