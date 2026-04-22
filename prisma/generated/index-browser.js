@@ -127,6 +127,17 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ClassScalarFieldEnum = {
+  id: 'id',
+  title: 'title'
+};
+
+exports.Prisma.UserClassScalarFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  userId: 'userId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -139,7 +150,9 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Class: 'Class',
+  UserClass: 'UserClass'
 };
 
 /**
