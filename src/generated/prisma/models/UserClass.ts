@@ -335,48 +335,6 @@ export type UserClassSumOrderByAggregateInput = {
   userId?: Prisma.SortOrder
 }
 
-export type UserClassCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput> | Prisma.UserClassCreateWithoutUserInput[] | Prisma.UserClassUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutUserInput | Prisma.UserClassCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.UserClassCreateManyUserInputEnvelope
-  connect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-}
-
-export type UserClassUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput> | Prisma.UserClassCreateWithoutUserInput[] | Prisma.UserClassUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutUserInput | Prisma.UserClassCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.UserClassCreateManyUserInputEnvelope
-  connect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-}
-
-export type UserClassUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput> | Prisma.UserClassCreateWithoutUserInput[] | Prisma.UserClassUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutUserInput | Prisma.UserClassCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.UserClassUpsertWithWhereUniqueWithoutUserInput | Prisma.UserClassUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.UserClassCreateManyUserInputEnvelope
-  set?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-  disconnect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-  delete?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-  connect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-  update?: Prisma.UserClassUpdateWithWhereUniqueWithoutUserInput | Prisma.UserClassUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.UserClassUpdateManyWithWhereWithoutUserInput | Prisma.UserClassUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
-}
-
-export type UserClassUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput> | Prisma.UserClassCreateWithoutUserInput[] | Prisma.UserClassUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutUserInput | Prisma.UserClassCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.UserClassUpsertWithWhereUniqueWithoutUserInput | Prisma.UserClassUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.UserClassCreateManyUserInputEnvelope
-  set?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-  disconnect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-  delete?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-  connect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
-  update?: Prisma.UserClassUpdateWithWhereUniqueWithoutUserInput | Prisma.UserClassUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.UserClassUpdateManyWithWhereWithoutUserInput | Prisma.UserClassUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
-}
-
 export type UserClassCreateNestedManyWithoutClassInput = {
   create?: Prisma.XOR<Prisma.UserClassCreateWithoutClassInput, Prisma.UserClassUncheckedCreateWithoutClassInput> | Prisma.UserClassCreateWithoutClassInput[] | Prisma.UserClassUncheckedCreateWithoutClassInput[]
   connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutClassInput | Prisma.UserClassCreateOrConnectWithoutClassInput[]
@@ -419,48 +377,46 @@ export type UserClassUncheckedUpdateManyWithoutClassNestedInput = {
   deleteMany?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
 }
 
-export type UserClassCreateWithoutUserInput = {
-  class: Prisma.ClassCreateNestedOneWithoutUsersInput
+export type UserClassCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput> | Prisma.UserClassCreateWithoutUserInput[] | Prisma.UserClassUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutUserInput | Prisma.UserClassCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.UserClassCreateManyUserInputEnvelope
+  connect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
 }
 
-export type UserClassUncheckedCreateWithoutUserInput = {
-  id?: number
-  classId: number
+export type UserClassUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput> | Prisma.UserClassCreateWithoutUserInput[] | Prisma.UserClassUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutUserInput | Prisma.UserClassCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.UserClassCreateManyUserInputEnvelope
+  connect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
 }
 
-export type UserClassCreateOrConnectWithoutUserInput = {
-  where: Prisma.UserClassWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput>
+export type UserClassUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput> | Prisma.UserClassCreateWithoutUserInput[] | Prisma.UserClassUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutUserInput | Prisma.UserClassCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.UserClassUpsertWithWhereUniqueWithoutUserInput | Prisma.UserClassUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.UserClassCreateManyUserInputEnvelope
+  set?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
+  disconnect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
+  delete?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
+  connect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
+  update?: Prisma.UserClassUpdateWithWhereUniqueWithoutUserInput | Prisma.UserClassUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.UserClassUpdateManyWithWhereWithoutUserInput | Prisma.UserClassUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
 }
 
-export type UserClassCreateManyUserInputEnvelope = {
-  data: Prisma.UserClassCreateManyUserInput | Prisma.UserClassCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
-
-export type UserClassUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.UserClassWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserClassUpdateWithoutUserInput, Prisma.UserClassUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput>
-}
-
-export type UserClassUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.UserClassWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserClassUpdateWithoutUserInput, Prisma.UserClassUncheckedUpdateWithoutUserInput>
-}
-
-export type UserClassUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.UserClassScalarWhereInput
-  data: Prisma.XOR<Prisma.UserClassUpdateManyMutationInput, Prisma.UserClassUncheckedUpdateManyWithoutUserInput>
-}
-
-export type UserClassScalarWhereInput = {
-  AND?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
-  OR?: Prisma.UserClassScalarWhereInput[]
-  NOT?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
-  id?: Prisma.IntFilter<"UserClass"> | number
-  classId?: Prisma.IntFilter<"UserClass"> | number
-  userId?: Prisma.IntFilter<"UserClass"> | number
+export type UserClassUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput> | Prisma.UserClassCreateWithoutUserInput[] | Prisma.UserClassUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.UserClassCreateOrConnectWithoutUserInput | Prisma.UserClassCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.UserClassUpsertWithWhereUniqueWithoutUserInput | Prisma.UserClassUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.UserClassCreateManyUserInputEnvelope
+  set?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
+  disconnect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
+  delete?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
+  connect?: Prisma.UserClassWhereUniqueInput | Prisma.UserClassWhereUniqueInput[]
+  update?: Prisma.UserClassUpdateWithWhereUniqueWithoutUserInput | Prisma.UserClassUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.UserClassUpdateManyWithWhereWithoutUserInput | Prisma.UserClassUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
 }
 
 export type UserClassCreateWithoutClassInput = {
@@ -498,23 +454,48 @@ export type UserClassUpdateManyWithWhereWithoutClassInput = {
   data: Prisma.XOR<Prisma.UserClassUpdateManyMutationInput, Prisma.UserClassUncheckedUpdateManyWithoutClassInput>
 }
 
-export type UserClassCreateManyUserInput = {
+export type UserClassScalarWhereInput = {
+  AND?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
+  OR?: Prisma.UserClassScalarWhereInput[]
+  NOT?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
+  id?: Prisma.IntFilter<"UserClass"> | number
+  classId?: Prisma.IntFilter<"UserClass"> | number
+  userId?: Prisma.IntFilter<"UserClass"> | number
+}
+
+export type UserClassCreateWithoutUserInput = {
+  class: Prisma.ClassCreateNestedOneWithoutUsersInput
+}
+
+export type UserClassUncheckedCreateWithoutUserInput = {
   id?: number
   classId: number
 }
 
-export type UserClassUpdateWithoutUserInput = {
-  class?: Prisma.ClassUpdateOneRequiredWithoutUsersNestedInput
+export type UserClassCreateOrConnectWithoutUserInput = {
+  where: Prisma.UserClassWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput>
 }
 
-export type UserClassUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  classId?: Prisma.IntFieldUpdateOperationsInput | number
+export type UserClassCreateManyUserInputEnvelope = {
+  data: Prisma.UserClassCreateManyUserInput | Prisma.UserClassCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
-export type UserClassUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  classId?: Prisma.IntFieldUpdateOperationsInput | number
+export type UserClassUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.UserClassWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserClassUpdateWithoutUserInput, Prisma.UserClassUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.UserClassCreateWithoutUserInput, Prisma.UserClassUncheckedCreateWithoutUserInput>
+}
+
+export type UserClassUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.UserClassWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserClassUpdateWithoutUserInput, Prisma.UserClassUncheckedUpdateWithoutUserInput>
+}
+
+export type UserClassUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.UserClassScalarWhereInput
+  data: Prisma.XOR<Prisma.UserClassUpdateManyMutationInput, Prisma.UserClassUncheckedUpdateManyWithoutUserInput>
 }
 
 export type UserClassCreateManyClassInput = {
@@ -534,6 +515,25 @@ export type UserClassUncheckedUpdateWithoutClassInput = {
 export type UserClassUncheckedUpdateManyWithoutClassInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type UserClassCreateManyUserInput = {
+  id?: number
+  classId: number
+}
+
+export type UserClassUpdateWithoutUserInput = {
+  class?: Prisma.ClassUpdateOneRequiredWithoutUsersNestedInput
+}
+
+export type UserClassUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  classId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type UserClassUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  classId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 

@@ -15,6 +15,10 @@ export class CreateUserDto {
   email!: string;
 
   @IsOptional()
+  @IsNotEmpty()
+  password?: string;
+
+  @IsOptional()
   @IsArray()
   @Type(() => Number)
   @IsInt({ each: true })

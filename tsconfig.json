@@ -12,6 +12,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+
     "target": "ES2023",
     "sourceMap": true,
     "rootDir": "./src",
@@ -30,7 +31,7 @@
   "exclude": [
     "node_modules",
     "dist",
-    "generated",
+    "src/generated",
     "prisma/generated",
     "src/generated"
   ]

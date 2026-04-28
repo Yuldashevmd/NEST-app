@@ -1,0 +1,8 @@
+model Class {
+  id    Int         @id @default(autoincrement())
+  title String      @db.VarChar(50)
+  users UserClass[]
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  @@map("classes")
+}

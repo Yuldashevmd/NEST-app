@@ -1,0 +1,10 @@
+model User {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(100)
+  password  String      @db.VarChar(255) @default("")
+  email     String      @unique()
+  createdAt DateTime    @default(now()) @map("created_at")
+  classes   UserClass[]
+
+  @@map("users")
+}
