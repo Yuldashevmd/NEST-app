@@ -44,6 +44,7 @@ export class UserService {
             },
           },
         },
+        posts: true,
       },
     });
 
@@ -53,6 +54,7 @@ export class UserService {
       email: user.email,
       createdAt: user.createdAt,
       classes: user.classes.map((item) => item.class),
+      posts: user.posts,
     }));
   }
 
