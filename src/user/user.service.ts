@@ -45,6 +45,7 @@ export class UserService {
           },
         },
         posts: true,
+        profile: true,
       },
     });
 
@@ -55,6 +56,7 @@ export class UserService {
       createdAt: user.createdAt,
       classes: user.classes.map((item) => item.class),
       posts: user.posts,
+      profile: user.profile,
     }));
   }
 

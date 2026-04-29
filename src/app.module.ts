@@ -6,9 +6,17 @@ import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { PostModule } from './post/post.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
-  imports: [PrismaModule, UserModule, ClassModule, AuthModule, PostModule],
+  imports: [
+    PrismaModule,
+    UserModule,
+    ClassModule,
+    AuthModule,
+    PostModule,
+    ProfileModule,
+  ],
   providers: [
     {
       provide: APP_GUARD,

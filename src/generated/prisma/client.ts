@@ -48,6 +48,11 @@ export type Class = Prisma.ClassModel
  */
 export type Post = Prisma.PostModel
 /**
+ * Model Profile
+ * 
+ */
+export type Profile = Prisma.ProfileModel
+/**
  * Model UserClass
  * 
  */
