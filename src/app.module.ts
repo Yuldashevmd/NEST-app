@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from './prisma/prisma.module';
-import { UserModule } from './user/user.module';
-import { ClassModule } from './class/class.module';
 import { AuthModule } from './auth/auth.module';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from './configs/guards/jwt-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
-import { PostModule } from './post/post.module';
-import { ProfileModule } from './profile/profile.module';
+import { PrismaModule } from './configs/prisma/prisma.module';
+import { ClassModule } from './modules/class/class.module';
+import { PostModule } from './modules/post/post.module';
+import { ProfileModule } from './modules/profile/profile.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
