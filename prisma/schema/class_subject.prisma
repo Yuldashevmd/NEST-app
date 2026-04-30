@@ -1,0 +1,12 @@
+model Class_Subject {
+  id        String   @id @default(cuid()) @db.VarChar(50)
+  classId   String   @map("class_id")
+  subjectId String   @map("subject_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  class   Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, subjectId])
+  @@map("class_subjects")
+}

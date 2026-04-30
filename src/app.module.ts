@@ -7,6 +7,7 @@ import { ClassModule } from './modules/class/class.module';
 import { PostModule } from './modules/post/post.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { UserModule } from './modules/user/user.module';
+import { SubjectModule } from './modules/subject/subject.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserModule } from './modules/user/user.module';
     AuthModule,
     PostModule,
     ProfileModule,
+    SubjectModule,
   ],
   providers: [
     {

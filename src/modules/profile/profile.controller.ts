@@ -4,7 +4,7 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 
 type RequestWithUser = Request & {
   user: {
-    sub: number;
+    sub: string;
     email: string;
   };
 };

@@ -20,34 +20,20 @@ export type UserClassModel = runtime.Types.Result.DefaultSelection<Prisma.$UserC
 
 export type AggregateUserClass = {
   _count: UserClassCountAggregateOutputType | null
-  _avg: UserClassAvgAggregateOutputType | null
-  _sum: UserClassSumAggregateOutputType | null
   _min: UserClassMinAggregateOutputType | null
   _max: UserClassMaxAggregateOutputType | null
 }
 
-export type UserClassAvgAggregateOutputType = {
-  id: number | null
-  classId: number | null
-  userId: number | null
-}
-
-export type UserClassSumAggregateOutputType = {
-  id: number | null
-  classId: number | null
-  userId: number | null
-}
-
 export type UserClassMinAggregateOutputType = {
-  id: number | null
-  classId: number | null
-  userId: number | null
+  id: string | null
+  classId: string | null
+  userId: string | null
 }
 
 export type UserClassMaxAggregateOutputType = {
-  id: number | null
-  classId: number | null
-  userId: number | null
+  id: string | null
+  classId: string | null
+  userId: string | null
 }
 
 export type UserClassCountAggregateOutputType = {
@@ -57,18 +43,6 @@ export type UserClassCountAggregateOutputType = {
   _all: number
 }
 
-
-export type UserClassAvgAggregateInputType = {
-  id?: true
-  classId?: true
-  userId?: true
-}
-
-export type UserClassSumAggregateInputType = {
-  id?: true
-  classId?: true
-  userId?: true
-}
 
 export type UserClassMinAggregateInputType = {
   id?: true
@@ -127,18 +101,6 @@ export type UserClassAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inte
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: UserClassAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: UserClassSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserClassMinAggregateInputType
@@ -169,19 +131,15 @@ export type UserClassGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   _count?: UserClassCountAggregateInputType | true
-  _avg?: UserClassAvgAggregateInputType
-  _sum?: UserClassSumAggregateInputType
   _min?: UserClassMinAggregateInputType
   _max?: UserClassMaxAggregateInputType
 }
 
 export type UserClassGroupByOutputType = {
-  id: number
-  classId: number
-  userId: number
+  id: string
+  classId: string
+  userId: string
   _count: UserClassCountAggregateOutputType | null
-  _avg: UserClassAvgAggregateOutputType | null
-  _sum: UserClassSumAggregateOutputType | null
   _min: UserClassMinAggregateOutputType | null
   _max: UserClassMaxAggregateOutputType | null
 }
@@ -205,9 +163,9 @@ export type UserClassWhereInput = {
   AND?: Prisma.UserClassWhereInput | Prisma.UserClassWhereInput[]
   OR?: Prisma.UserClassWhereInput[]
   NOT?: Prisma.UserClassWhereInput | Prisma.UserClassWhereInput[]
-  id?: Prisma.IntFilter<"UserClass"> | number
-  classId?: Prisma.IntFilter<"UserClass"> | number
-  userId?: Prisma.IntFilter<"UserClass"> | number
+  id?: Prisma.StringFilter<"UserClass"> | string
+  classId?: Prisma.StringFilter<"UserClass"> | string
+  userId?: Prisma.StringFilter<"UserClass"> | string
   class?: Prisma.XOR<Prisma.ClassScalarRelationFilter, Prisma.ClassWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -221,13 +179,13 @@ export type UserClassOrderByWithRelationInput = {
 }
 
 export type UserClassWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   userId_classId?: Prisma.UserClassUserIdClassIdCompoundUniqueInput
   AND?: Prisma.UserClassWhereInput | Prisma.UserClassWhereInput[]
   OR?: Prisma.UserClassWhereInput[]
   NOT?: Prisma.UserClassWhereInput | Prisma.UserClassWhereInput[]
-  classId?: Prisma.IntFilter<"UserClass"> | number
-  userId?: Prisma.IntFilter<"UserClass"> | number
+  classId?: Prisma.StringFilter<"UserClass"> | string
+  userId?: Prisma.StringFilter<"UserClass"> | string
   class?: Prisma.XOR<Prisma.ClassScalarRelationFilter, Prisma.ClassWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_classId">
@@ -237,57 +195,57 @@ export type UserClassOrderByWithAggregationInput = {
   classId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   _count?: Prisma.UserClassCountOrderByAggregateInput
-  _avg?: Prisma.UserClassAvgOrderByAggregateInput
   _max?: Prisma.UserClassMaxOrderByAggregateInput
   _min?: Prisma.UserClassMinOrderByAggregateInput
-  _sum?: Prisma.UserClassSumOrderByAggregateInput
 }
 
 export type UserClassScalarWhereWithAggregatesInput = {
   AND?: Prisma.UserClassScalarWhereWithAggregatesInput | Prisma.UserClassScalarWhereWithAggregatesInput[]
   OR?: Prisma.UserClassScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserClassScalarWhereWithAggregatesInput | Prisma.UserClassScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"UserClass"> | number
-  classId?: Prisma.IntWithAggregatesFilter<"UserClass"> | number
-  userId?: Prisma.IntWithAggregatesFilter<"UserClass"> | number
+  id?: Prisma.StringWithAggregatesFilter<"UserClass"> | string
+  classId?: Prisma.StringWithAggregatesFilter<"UserClass"> | string
+  userId?: Prisma.StringWithAggregatesFilter<"UserClass"> | string
 }
 
 export type UserClassCreateInput = {
+  id?: string
   class: Prisma.ClassCreateNestedOneWithoutUsersInput
   user: Prisma.UserCreateNestedOneWithoutClassesInput
 }
 
 export type UserClassUncheckedCreateInput = {
-  id?: number
-  classId: number
-  userId: number
+  id?: string
+  classId: string
+  userId: string
 }
 
 export type UserClassUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   class?: Prisma.ClassUpdateOneRequiredWithoutUsersNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutClassesNestedInput
 }
 
 export type UserClassUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  classId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserClassCreateManyInput = {
-  id?: number
-  classId: number
-  userId: number
+  id?: string
+  classId: string
+  userId: string
 }
 
 export type UserClassUpdateManyMutationInput = {
-
+  id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserClassUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  classId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserClassListRelationFilter = {
@@ -301,17 +259,11 @@ export type UserClassOrderByRelationAggregateInput = {
 }
 
 export type UserClassUserIdClassIdCompoundUniqueInput = {
-  userId: number
-  classId: number
+  userId: string
+  classId: string
 }
 
 export type UserClassCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  classId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-}
-
-export type UserClassAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   classId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -324,12 +276,6 @@ export type UserClassMaxOrderByAggregateInput = {
 }
 
 export type UserClassMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  classId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-}
-
-export type UserClassSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   classId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -420,12 +366,13 @@ export type UserClassUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type UserClassCreateWithoutClassInput = {
+  id?: string
   user: Prisma.UserCreateNestedOneWithoutClassesInput
 }
 
 export type UserClassUncheckedCreateWithoutClassInput = {
-  id?: number
-  userId: number
+  id?: string
+  userId: string
 }
 
 export type UserClassCreateOrConnectWithoutClassInput = {
@@ -458,18 +405,19 @@ export type UserClassScalarWhereInput = {
   AND?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
   OR?: Prisma.UserClassScalarWhereInput[]
   NOT?: Prisma.UserClassScalarWhereInput | Prisma.UserClassScalarWhereInput[]
-  id?: Prisma.IntFilter<"UserClass"> | number
-  classId?: Prisma.IntFilter<"UserClass"> | number
-  userId?: Prisma.IntFilter<"UserClass"> | number
+  id?: Prisma.StringFilter<"UserClass"> | string
+  classId?: Prisma.StringFilter<"UserClass"> | string
+  userId?: Prisma.StringFilter<"UserClass"> | string
 }
 
 export type UserClassCreateWithoutUserInput = {
+  id?: string
   class: Prisma.ClassCreateNestedOneWithoutUsersInput
 }
 
 export type UserClassUncheckedCreateWithoutUserInput = {
-  id?: number
-  classId: number
+  id?: string
+  classId: string
 }
 
 export type UserClassCreateOrConnectWithoutUserInput = {
@@ -499,41 +447,43 @@ export type UserClassUpdateManyWithWhereWithoutUserInput = {
 }
 
 export type UserClassCreateManyClassInput = {
-  id?: number
-  userId: number
+  id?: string
+  userId: string
 }
 
 export type UserClassUpdateWithoutClassInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   user?: Prisma.UserUpdateOneRequiredWithoutClassesNestedInput
 }
 
 export type UserClassUncheckedUpdateWithoutClassInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserClassUncheckedUpdateManyWithoutClassInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserClassCreateManyUserInput = {
-  id?: number
-  classId: number
+  id?: string
+  classId: string
 }
 
 export type UserClassUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   class?: Prisma.ClassUpdateOneRequiredWithoutUsersNestedInput
 }
 
 export type UserClassUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  classId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserClassUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  classId?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  classId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -589,9 +539,9 @@ export type $UserClassPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
-    classId: number
-    userId: number
+    id: string
+    classId: string
+    userId: string
   }, ExtArgs["result"]["userClass"]>
   composites: {}
 }
@@ -1017,9 +967,9 @@ export interface Prisma__UserClassClient<T, Null = never, ExtArgs extends runtim
  * Fields of the UserClass model
  */
 export interface UserClassFieldRefs {
-  readonly id: Prisma.FieldRef<"UserClass", 'Int'>
-  readonly classId: Prisma.FieldRef<"UserClass", 'Int'>
-  readonly userId: Prisma.FieldRef<"UserClass", 'Int'>
+  readonly id: Prisma.FieldRef<"UserClass", 'String'>
+  readonly classId: Prisma.FieldRef<"UserClass", 'String'>
+  readonly userId: Prisma.FieldRef<"UserClass", 'String'>
 }
     
 

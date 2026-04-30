@@ -1,4 +1,4 @@
-import { IsArray, IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsArray, IsString, MaxLength } from 'class-validator';
 
 export class CreateClassDto {
   @IsString()
@@ -6,6 +6,6 @@ export class CreateClassDto {
   title: string;
 
   @IsArray()
-  @IsNumber({}, { each: true })
-  userIds: number[];
+  @IsString({ each: true })
+  userIds: string[];
 }

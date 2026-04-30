@@ -29,20 +29,20 @@ export class UserController {
   }
 
   @Get(':id')
-  async user(@Param('id', ParseIntPipe) id: number) {
+  async user(@Param('id', ParseIntPipe) id: string) {
     return await this.userService.user(id);
   }
 
   @Put(':id')
   async update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseIntPipe) id: string,
     @Body() dto: UpdateUserDto,
   ): Promise<string> {
     return await this.userService.update(id, dto);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number): Promise<string> {
+  async remove(@Param('id', ParseIntPipe) id: string): Promise<string> {
     return await this.userService.remove(id);
   }
 }

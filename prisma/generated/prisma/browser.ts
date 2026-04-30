@@ -23,6 +23,11 @@ export * from './enums.js';
  */
 export type Class = Prisma.ClassModel
 /**
+ * Model Class_Subject
+ * 
+ */
+export type Class_Subject = Prisma.Class_SubjectModel
+/**
  * Model Post
  * 
  */
@@ -32,6 +37,11 @@ export type Post = Prisma.PostModel
  * 
  */
 export type Profile = Prisma.ProfileModel
+/**
+ * Model Subject
+ * 
+ */
+export type Subject = Prisma.SubjectModel
 /**
  * Model UserClass
  * 

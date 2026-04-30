@@ -15,7 +15,7 @@ export class PostService {
       },
     });
   }
-  async post(id: number): Promise<ReadPostDto | null> {
+  async post(id: string): Promise<ReadPostDto | null> {
     return await this.prisma.post.findUnique({
       where: { id },
       include: {
@@ -36,12 +36,12 @@ export class PostService {
     return 'Post created successfully';
   }
 
-  async delete(id: number): Promise<string> {
+  async delete(id: string): Promise<string> {
     await this.prisma.post.delete({ where: { id } });
     return 'Post deleted successfully';
   }
 
-  async update(id: number, dto: UpdatePostDto): Promise<string> {
+  async update(id: string, dto: UpdatePostDto): Promise<string> {
     await this.prisma.post.update({
       where: { id },
       data: {

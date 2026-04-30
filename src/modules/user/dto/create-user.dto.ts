@@ -2,9 +2,9 @@ import { Type } from 'class-transformer';
 import {
   IsArray,
   IsEmail,
-  IsInt,
   IsNotEmpty,
   IsOptional,
+  IsString,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -20,7 +20,7 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsArray()
-  @Type(() => Number)
-  @IsInt({ each: true })
-  classIds?: number[];
+  @Type(() => String)
+  @IsString({ each: true })
+  classIds?: string[];
 }

@@ -1,9 +1,9 @@
 model UserClass {
-  id      Int   @id @default(autoincrement())
-  class   Class @relation(fields: [classId], references: [id], onDelete: Cascade)
-  classId Int  @map("class_id")
-  user    User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  Int  @map("user_id")
+  id      String @id @default(cuid()) @db.VarChar(50)
+  class   Class  @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classId String @map("class_id")
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String @map("user_id")
 
   @@unique([userId, classId])
   @@map("user_classes")

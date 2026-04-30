@@ -20,28 +20,18 @@ export type ClassModel = runtime.Types.Result.DefaultSelection<Prisma.$ClassPayl
 
 export type AggregateClass = {
   _count: ClassCountAggregateOutputType | null
-  _avg: ClassAvgAggregateOutputType | null
-  _sum: ClassSumAggregateOutputType | null
   _min: ClassMinAggregateOutputType | null
   _max: ClassMaxAggregateOutputType | null
 }
 
-export type ClassAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type ClassSumAggregateOutputType = {
-  id: number | null
-}
-
 export type ClassMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   title: string | null
   createdAt: Date | null
 }
 
 export type ClassMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   title: string | null
   createdAt: Date | null
 }
@@ -53,14 +43,6 @@ export type ClassCountAggregateOutputType = {
   _all: number
 }
 
-
-export type ClassAvgAggregateInputType = {
-  id?: true
-}
-
-export type ClassSumAggregateInputType = {
-  id?: true
-}
 
 export type ClassMinAggregateInputType = {
   id?: true
@@ -119,18 +101,6 @@ export type ClassAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: ClassAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: ClassSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: ClassMinAggregateInputType
@@ -161,19 +131,15 @@ export type ClassGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: ClassCountAggregateInputType | true
-  _avg?: ClassAvgAggregateInputType
-  _sum?: ClassSumAggregateInputType
   _min?: ClassMinAggregateInputType
   _max?: ClassMaxAggregateInputType
 }
 
 export type ClassGroupByOutputType = {
-  id: number
+  id: string
   title: string
   createdAt: Date
   _count: ClassCountAggregateOutputType | null
-  _avg: ClassAvgAggregateOutputType | null
-  _sum: ClassSumAggregateOutputType | null
   _min: ClassMinAggregateOutputType | null
   _max: ClassMaxAggregateOutputType | null
 }
@@ -197,10 +163,11 @@ export type ClassWhereInput = {
   AND?: Prisma.ClassWhereInput | Prisma.ClassWhereInput[]
   OR?: Prisma.ClassWhereInput[]
   NOT?: Prisma.ClassWhereInput | Prisma.ClassWhereInput[]
-  id?: Prisma.IntFilter<"Class"> | number
+  id?: Prisma.StringFilter<"Class"> | string
   title?: Prisma.StringFilter<"Class"> | string
   createdAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   users?: Prisma.UserClassListRelationFilter
+  subjects?: Prisma.Class_SubjectListRelationFilter
 }
 
 export type ClassOrderByWithRelationInput = {
@@ -208,16 +175,18 @@ export type ClassOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   users?: Prisma.UserClassOrderByRelationAggregateInput
+  subjects?: Prisma.Class_SubjectOrderByRelationAggregateInput
 }
 
 export type ClassWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   AND?: Prisma.ClassWhereInput | Prisma.ClassWhereInput[]
   OR?: Prisma.ClassWhereInput[]
   NOT?: Prisma.ClassWhereInput | Prisma.ClassWhereInput[]
   title?: Prisma.StringFilter<"Class"> | string
   createdAt?: Prisma.DateTimeFilter<"Class"> | Date | string
   users?: Prisma.UserClassListRelationFilter
+  subjects?: Prisma.Class_SubjectListRelationFilter
 }, "id">
 
 export type ClassOrderByWithAggregationInput = {
@@ -225,60 +194,65 @@ export type ClassOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ClassCountOrderByAggregateInput
-  _avg?: Prisma.ClassAvgOrderByAggregateInput
   _max?: Prisma.ClassMaxOrderByAggregateInput
   _min?: Prisma.ClassMinOrderByAggregateInput
-  _sum?: Prisma.ClassSumOrderByAggregateInput
 }
 
 export type ClassScalarWhereWithAggregatesInput = {
   AND?: Prisma.ClassScalarWhereWithAggregatesInput | Prisma.ClassScalarWhereWithAggregatesInput[]
   OR?: Prisma.ClassScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ClassScalarWhereWithAggregatesInput | Prisma.ClassScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Class"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Class"> | string
   title?: Prisma.StringWithAggregatesFilter<"Class"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Class"> | Date | string
 }
 
 export type ClassCreateInput = {
+  id?: string
   title: string
   createdAt?: Date | string
   users?: Prisma.UserClassCreateNestedManyWithoutClassInput
+  subjects?: Prisma.Class_SubjectCreateNestedManyWithoutClassInput
 }
 
 export type ClassUncheckedCreateInput = {
-  id?: number
+  id?: string
   title: string
   createdAt?: Date | string
   users?: Prisma.UserClassUncheckedCreateNestedManyWithoutClassInput
+  subjects?: Prisma.Class_SubjectUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ClassUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserClassUpdateManyWithoutClassNestedInput
+  subjects?: Prisma.Class_SubjectUpdateManyWithoutClassNestedInput
 }
 
 export type ClassUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserClassUncheckedUpdateManyWithoutClassNestedInput
+  subjects?: Prisma.Class_SubjectUncheckedUpdateManyWithoutClassNestedInput
 }
 
 export type ClassCreateManyInput = {
-  id?: number
+  id?: string
   title: string
   createdAt?: Date | string
 }
 
 export type ClassUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClassUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -287,10 +261,6 @@ export type ClassCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-}
-
-export type ClassAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type ClassMaxOrderByAggregateInput = {
@@ -303,10 +273,6 @@ export type ClassMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-}
-
-export type ClassSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type ClassScalarRelationFilter = {
@@ -322,12 +288,18 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type ClassCreateNestedOneWithoutSubjectsInput = {
+  create?: Prisma.XOR<Prisma.ClassCreateWithoutSubjectsInput, Prisma.ClassUncheckedCreateWithoutSubjectsInput>
+  connectOrCreate?: Prisma.ClassCreateOrConnectWithoutSubjectsInput
+  connect?: Prisma.ClassWhereUniqueInput
+}
+
+export type ClassUpdateOneRequiredWithoutSubjectsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClassCreateWithoutSubjectsInput, Prisma.ClassUncheckedCreateWithoutSubjectsInput>
+  connectOrCreate?: Prisma.ClassCreateOrConnectWithoutSubjectsInput
+  upsert?: Prisma.ClassUpsertWithoutSubjectsInput
+  connect?: Prisma.ClassWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClassUpdateToOneWithWhereWithoutSubjectsInput, Prisma.ClassUpdateWithoutSubjectsInput>, Prisma.ClassUncheckedUpdateWithoutSubjectsInput>
 }
 
 export type ClassCreateNestedOneWithoutUsersInput = {
@@ -344,15 +316,62 @@ export type ClassUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClassUpdateToOneWithWhereWithoutUsersInput, Prisma.ClassUpdateWithoutUsersInput>, Prisma.ClassUncheckedUpdateWithoutUsersInput>
 }
 
-export type ClassCreateWithoutUsersInput = {
+export type ClassCreateWithoutSubjectsInput = {
+  id?: string
   title: string
   createdAt?: Date | string
+  users?: Prisma.UserClassCreateNestedManyWithoutClassInput
+}
+
+export type ClassUncheckedCreateWithoutSubjectsInput = {
+  id?: string
+  title: string
+  createdAt?: Date | string
+  users?: Prisma.UserClassUncheckedCreateNestedManyWithoutClassInput
+}
+
+export type ClassCreateOrConnectWithoutSubjectsInput = {
+  where: Prisma.ClassWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClassCreateWithoutSubjectsInput, Prisma.ClassUncheckedCreateWithoutSubjectsInput>
+}
+
+export type ClassUpsertWithoutSubjectsInput = {
+  update: Prisma.XOR<Prisma.ClassUpdateWithoutSubjectsInput, Prisma.ClassUncheckedUpdateWithoutSubjectsInput>
+  create: Prisma.XOR<Prisma.ClassCreateWithoutSubjectsInput, Prisma.ClassUncheckedCreateWithoutSubjectsInput>
+  where?: Prisma.ClassWhereInput
+}
+
+export type ClassUpdateToOneWithWhereWithoutSubjectsInput = {
+  where?: Prisma.ClassWhereInput
+  data: Prisma.XOR<Prisma.ClassUpdateWithoutSubjectsInput, Prisma.ClassUncheckedUpdateWithoutSubjectsInput>
+}
+
+export type ClassUpdateWithoutSubjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserClassUpdateManyWithoutClassNestedInput
+}
+
+export type ClassUncheckedUpdateWithoutSubjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UserClassUncheckedUpdateManyWithoutClassNestedInput
+}
+
+export type ClassCreateWithoutUsersInput = {
+  id?: string
+  title: string
+  createdAt?: Date | string
+  subjects?: Prisma.Class_SubjectCreateNestedManyWithoutClassInput
 }
 
 export type ClassUncheckedCreateWithoutUsersInput = {
-  id?: number
+  id?: string
   title: string
   createdAt?: Date | string
+  subjects?: Prisma.Class_SubjectUncheckedCreateNestedManyWithoutClassInput
 }
 
 export type ClassCreateOrConnectWithoutUsersInput = {
@@ -372,14 +391,17 @@ export type ClassUpdateToOneWithWhereWithoutUsersInput = {
 }
 
 export type ClassUpdateWithoutUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subjects?: Prisma.Class_SubjectUpdateManyWithoutClassNestedInput
 }
 
 export type ClassUncheckedUpdateWithoutUsersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subjects?: Prisma.Class_SubjectUncheckedUpdateManyWithoutClassNestedInput
 }
 
 
@@ -389,10 +411,12 @@ export type ClassUncheckedUpdateWithoutUsersInput = {
 
 export type ClassCountOutputType = {
   users: number
+  subjects: number
 }
 
 export type ClassCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | ClassCountOutputTypeCountUsersArgs
+  subjects?: boolean | ClassCountOutputTypeCountSubjectsArgs
 }
 
 /**
@@ -412,12 +436,20 @@ export type ClassCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Ext
   where?: Prisma.UserClassWhereInput
 }
 
+/**
+ * ClassCountOutputType without action
+ */
+export type ClassCountOutputTypeCountSubjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.Class_SubjectWhereInput
+}
+
 
 export type ClassSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   createdAt?: boolean
   users?: boolean | Prisma.Class$usersArgs<ExtArgs>
+  subjects?: boolean | Prisma.Class$subjectsArgs<ExtArgs>
   _count?: boolean | Prisma.ClassCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["class"]>
 
@@ -442,6 +474,7 @@ export type ClassSelectScalar = {
 export type ClassOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "createdAt", ExtArgs["result"]["class"]>
 export type ClassInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.Class$usersArgs<ExtArgs>
+  subjects?: boolean | Prisma.Class$subjectsArgs<ExtArgs>
   _count?: boolean | Prisma.ClassCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClassIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -451,9 +484,10 @@ export type $ClassPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "Class"
   objects: {
     users: Prisma.$UserClassPayload<ExtArgs>[]
+    subjects: Prisma.$Class_SubjectPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     title: string
     createdAt: Date
   }, ExtArgs["result"]["class"]>
@@ -851,6 +885,7 @@ readonly fields: ClassFieldRefs;
 export interface Prisma__ClassClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.Class$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Class$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserClassPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subjects<T extends Prisma.Class$subjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Class$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Class_SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -880,7 +915,7 @@ export interface Prisma__ClassClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the Class model
  */
 export interface ClassFieldRefs {
-  readonly id: Prisma.FieldRef<"Class", 'Int'>
+  readonly id: Prisma.FieldRef<"Class", 'String'>
   readonly title: Prisma.FieldRef<"Class", 'String'>
   readonly createdAt: Prisma.FieldRef<"Class", 'DateTime'>
 }
@@ -1292,6 +1327,30 @@ export type Class$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   distinct?: Prisma.UserClassScalarFieldEnum | Prisma.UserClassScalarFieldEnum[]
+}
+
+/**
+ * Class.subjects
+ */
+export type Class$subjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Class_Subject
+   */
+  select?: Prisma.Class_SubjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Class_Subject
+   */
+  omit?: Prisma.Class_SubjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.Class_SubjectInclude<ExtArgs> | null
+  where?: Prisma.Class_SubjectWhereInput
+  orderBy?: Prisma.Class_SubjectOrderByWithRelationInput | Prisma.Class_SubjectOrderByWithRelationInput[]
+  cursor?: Prisma.Class_SubjectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Class_SubjectScalarFieldEnum | Prisma.Class_SubjectScalarFieldEnum[]
 }
 
 /**

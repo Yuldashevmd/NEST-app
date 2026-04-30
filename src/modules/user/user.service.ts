@@ -60,11 +60,11 @@ export class UserService {
     }));
   }
 
-  async user(id: number) {
+  async user(id: string) {
     return await this.prisma.user.findUnique({ where: { id } });
   }
 
-  async update(id: number, data: Partial<CreateUserDto>): Promise<string> {
+  async update(id: string, data: Partial<CreateUserDto>): Promise<string> {
     await this.prisma.user.update({
       where: { id },
       data: {
@@ -87,7 +87,7 @@ export class UserService {
     return 'Sucessfully updated';
   }
 
-  async remove(id: number): Promise<string> {
+  async remove(id: string): Promise<string> {
     await this.prisma.user.delete({ where: { id } });
     return 'Sucessfully deleted';
   }

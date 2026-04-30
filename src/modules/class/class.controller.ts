@@ -29,7 +29,7 @@ export class ClassController {
 
   @Get(':id')
   async class(@Param('id') id: string): Promise<ReadClassDto | null> {
-    return await this.classService.class(+id);
+    return await this.classService.class(id);
   }
 
   @Put(':id')
@@ -37,11 +37,11 @@ export class ClassController {
     @Param('id') id: string,
     @Body() updateClassDto: UpdateClassDto,
   ): Promise<string> {
-    return await this.classService.update(+id, updateClassDto);
+    return await this.classService.update(id, updateClassDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string): Promise<string> {
-    return this.classService.remove(+id);
+    return this.classService.remove(id);
   }
 }

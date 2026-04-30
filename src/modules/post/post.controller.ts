@@ -13,7 +13,7 @@ export class PostController {
     return await this.postService.posts();
   }
   @Get(':id')
-  async post(id: number): Promise<ReadPostDto | null> {
+  async post(id: string): Promise<ReadPostDto | null> {
     return await this.postService.post(id);
   }
 
@@ -23,7 +23,7 @@ export class PostController {
   }
 
   @Delete(':id')
-  async delete(@Body() id: number): Promise<string> {
+  async delete(@Body() id: string): Promise<string> {
     return await this.postService.delete(id);
   }
 

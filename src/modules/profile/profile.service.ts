@@ -6,7 +6,7 @@ import { PrismaService } from 'src/configs/prisma/prisma.service';
 export class ProfileService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getProfile(userId: number) {
+  async getProfile(userId: string) {
     const profile = await this.prisma.profile.findUnique({
       where: {
         userId,
@@ -19,7 +19,7 @@ export class ProfileService {
     return profile;
   }
 
-  async updateProfile(userId: number, data: UpdateProfileDto) {
+  async updateProfile(userId: string, data: UpdateProfileDto) {
     const profile = await this.prisma.profile.upsert({
       where: {
         userId,

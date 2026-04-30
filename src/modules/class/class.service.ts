@@ -47,11 +47,11 @@ export class ClassService {
     }));
   }
 
-  async class(id: number): Promise<ReadClassDto | null> {
+  async class(id: string): Promise<ReadClassDto | null> {
     return await this.prisma.class.findUnique({ where: { id } });
   }
 
-  async update(id: number, data: Partial<CreateClassDto>): Promise<string> {
+  async update(id: string, data: Partial<CreateClassDto>): Promise<string> {
     await this.prisma.class.update({
       where: { id },
       data: {
@@ -72,7 +72,7 @@ export class ClassService {
     return 'Successfully updated';
   }
 
-  async remove(id: number): Promise<string> {
+  async remove(id: string): Promise<string> {
     await this.prisma.class.delete({ where: { id } });
     return 'Sucessfully deleted';
   }

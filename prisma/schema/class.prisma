@@ -1,8 +1,9 @@
 model Class {
-  id    Int         @id @default(autoincrement())
-  title String      @db.VarChar(50)
-  users UserClass[]
+  id        String      @id @default(cuid()) @db.VarChar(50)
+  title     String      @db.VarChar(50)
+  users     UserClass[]
   createdAt DateTime    @default(now()) @map("created_at")
+  subjects  Class_Subject[]
 
   @@map("classes")
 }
