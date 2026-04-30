@@ -33,31 +33,52 @@ export class UserService {
           mode: 'insensitive',
         },
       },
-      include: {
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        createdAt: true,
+
         classes: {
-          include: {
+          select: {
             class: {
               select: {
                 id: true,
                 title: true,
+
+                subjects: {
+                  select: {
+                    subject: {
+                      select: {
+                        id: true,
+                        title: true,
+                      },
+                    },
+                  },
+                },
               },
             },
           },
         },
-        posts: true,
-        profile: true,
+
+        posts: {
+          select: {
+            id: true,
+            title: true,
+            content: true,
+          },
+        },
+
+        profile: {
+          select: {
+            id: true,
+            bio: true,
+          },
+        },
       },
     });
 
-    return users.map((user) => ({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      createdAt: user.createdAt,
-      classes: user.classes.map((item) => item.class),
-      posts: user.posts,
-      profile: user.profile,
-    }));
+    return users;
   }
 
   async user(id: string) {
