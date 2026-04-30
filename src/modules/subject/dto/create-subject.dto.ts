@@ -13,5 +13,5 @@ export class CreateSubjectDto {
     description: 'The IDs of the classes associated with the subject',
   })
   @IsOptional()
-  subjectIds: string[];
+  classIds: string[];
 }

@@ -14,17 +14,24 @@ export class SubjectService {
           contains: query?.search,
         },
       },
+      include: {
+        classes: {
+          include: {
+            class: true,
+          },
+        },
+      },
     });
   }
 
   async create(dto: CreateSubjectDto) {
     return await this.prisma.subject.create({
       data:
-        dto.subjectIds.length > 0
+        dto.classIds?.length > 0
           ? {
               title: dto.title,
               classes: {
-                create: dto.subjectIds.map((classId) => ({
+                create: dto.classIds.map((classId) => ({
                   class: {
                     connect: {
                       id: classId,
@@ -54,14 +61,14 @@ export class SubjectService {
         id,
       },
       data:
-        dto.subjectIds.length > 0
+        dto.classIds?.length > 0
           ? {
               title: dto.title,
               classes: {
                 deleteMany: {
                   subjectId: id,
                 },
-                create: dto.subjectIds.map((classId) => ({
+                create: dto.classIds.map((classId) => ({
                   class: {
                     connect: {
                       id: classId,
