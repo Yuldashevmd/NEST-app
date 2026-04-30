@@ -10,6 +10,7 @@ import {
 import { SubjectService } from './subject.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { SubjectQueryDto } from './dto/query.dto';
+import { UpdateSubjectDto } from './dto/update-subject.dto';
 
 @Controller('subject')
 export class SubjectController {
@@ -26,7 +27,7 @@ export class SubjectController {
   }
 
   @Put(':id')
-  async update(@Body() dto: CreateSubjectDto, @Query('id') id: string) {
+  async update(@Body() dto: UpdateSubjectDto, @Query('id') id: string) {
     return await this.subjectService.update(id, dto);
   }
 

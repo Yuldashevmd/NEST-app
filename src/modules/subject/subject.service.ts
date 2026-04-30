@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
 import { SubjectQueryDto } from './dto/query.dto';
+import { UpdateSubjectDto } from './dto/update-subject.dto';
 
 @Injectable()
 export class SubjectService {
@@ -55,32 +56,32 @@ export class SubjectService {
     return 'Subject deleted successfully';
   }
 
-  async update(id: string, dto: CreateSubjectDto) {
-    await this.prisma.subject.update({
-      where: {
-        id,
-      },
-      data:
-        dto.classIds?.length > 0
-          ? {
-              title: dto.title,
-              classes: {
-                deleteMany: {
-                  subjectId: id,
-                },
-                create: dto.classIds.map((classId) => ({
-                  class: {
-                    connect: {
-                      id: classId,
-                    },
-                  },
-                })),
-              },
-            }
-          : {
-              title: dto.title,
-            },
+  async update(id: string, dto: UpdateSubjectDto) {
+    const { classIds, ...data } = dto;
+
+    const subject = await this.prisma.subject.findUnique({
+      where: { id },
     });
-    return 'Subject updated successfully';
+
+    if (!subject) {
+      throw new NotFoundException('Subject not found');
+    }
+
+    return this.prisma.subject.update({
+      where: { id },
+      data: {
+        ...data,
+        classes: classIds
+          ? {
+              deleteMany: {},
+              create: classIds.map((classId) => ({
+                class: {
+                  connect: { id: classId },
+                },
+              })),
+            }
+          : undefined,
+      },
+    });
   }
 }
