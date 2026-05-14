@@ -13,6 +13,7 @@ import { CreateResponseDto, CreateUserDto } from './dto/create-user.dto';
 import { ReadUsersResponseDto } from './dto/read-users.dto';
 import { UpdateUserDto, UpdateUserResponseDto } from './dto/update-user.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
+import { DeleteUserResponseDto } from './dto/delete-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -20,7 +21,7 @@ export class UserController {
 
   @Post()
   @ApiOkResponse({ type: CreateResponseDto })
-  async create(@Body() dto: CreateUserDto): Promise<{ message: string }> {
+  async create(@Body() dto: CreateUserDto): Promise<CreateResponseDto> {
     return await this.userService.create(dto);
   }
 
@@ -45,8 +46,8 @@ export class UserController {
   }
 
   @Delete(':id')
-  @ApiOkResponse({ example: { message: 'Sucessfully deleted' } })
-  async remove(@Param('id') id: string): Promise<{ message: string }> {
+  @ApiOkResponse({ type: DeleteUserResponseDto })
+  async remove(@Param('id') id: string): Promise<DeleteUserResponseDto> {
     return await this.userService.remove(id);
   }
 }

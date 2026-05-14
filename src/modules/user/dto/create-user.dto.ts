@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsArray,
@@ -30,5 +31,7 @@ export class CreateUserDto {
 }
 
 export class CreateResponseDto {
+  @ApiProperty({ example: 'User created successfully' })
+  @IsString()
   message: string;
 }
