@@ -1,22 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
-export class UpdateProfileDto {
+export class CreateProfileDto {
   @IsString()
   @ApiProperty()
-  @IsString()
   @IsOptional()
-  bio?: string;
+  name: string;
 
-  @IsString()
   @ApiProperty()
   @IsString()
-  @IsOptional()
-  name?: string;
+  bio: string;
+
+  @ApiProperty()
+  @IsString()
+  userId: string;
 }
 
-export class UpdateProfileResponseDto {
-  @ApiProperty()
+export class CreateProfileResponseDto {
+  @ApiProperty({ example: 'Profile created successfully' })
   @IsString()
   message: string;
 }

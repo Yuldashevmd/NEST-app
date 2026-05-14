@@ -9,20 +9,25 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
+  @ApiProperty()
   @IsNotEmpty()
   name!: string;
 
+  @ApiProperty()
   @IsEmail()
   email!: string;
 
+  @ApiProperty()
   @IsOptional()
   @IsNotEmpty()
   password?: string;
 
+  @ApiProperty()
   @IsOptional()
   @IsString()
   role?: string;
 
+  @ApiProperty()
   @IsOptional()
   @IsArray()
   @Type(() => String)

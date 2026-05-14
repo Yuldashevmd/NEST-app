@@ -1,6 +1,7 @@
 model Profile {
   id     String  @id @default(cuid()) @db.VarChar(50)
   bio    String?
+  name  String?   @db.VarChar(50)
   userId String  @unique @map("user_id")
   user   User    @relation(fields: [userId], references: [id])
 

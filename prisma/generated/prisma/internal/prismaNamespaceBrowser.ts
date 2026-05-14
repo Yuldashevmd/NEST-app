@@ -109,6 +109,7 @@ export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof Post
 export const ProfileScalarFieldEnum = {
   id: 'id',
   bio: 'bio',
+  name: 'name',
   userId: 'userId'
 } as const
 

@@ -1,12 +1,34 @@
 import { Injectable } from '@nestjs/common';
-import { UpdateProfileDto } from './dto/update-profile.dto';
+import {
+  UpdateProfileDto,
+  UpdateProfileResponseDto,
+} from './dto/update-profile.dto';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
+import { ReadProfileDto } from './dto/read-profile.dto';
+import {
+  CreateProfileDto,
+  CreateProfileResponseDto,
+} from './dto/create-profile.dto';
 
 @Injectable()
 export class ProfileService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getProfile(userId: string) {
+  async createProfile(
+    data: CreateProfileDto,
+  ): Promise<CreateProfileResponseDto> {
+    await this.prisma.profile.create({
+      data,
+      include: {
+        user: true,
+      },
+    });
+    return {
+      message: 'Profile created successfully',
+    };
+  }
+
+  async getProfile(userId: string): Promise<ReadProfileDto | null> {
     const profile = await this.prisma.profile.findUnique({
       where: {
         userId,
@@ -15,12 +37,22 @@ export class ProfileService {
         user: true,
       },
     });
-
-    return profile;
+    if (!profile) {
+      return null;
+    }
+    return {
+      id: profile.id,
+      bio: profile.bio,
+      name: profile.user.name,
+      userId: profile.userId,
+    };
   }
 
-  async updateProfile(userId: string, data: UpdateProfileDto) {
-    const profile = await this.prisma.profile.upsert({
+  async updateProfile(
+    userId: string,
+    data: UpdateProfileDto,
+  ): Promise<UpdateProfileResponseDto> {
+    await this.prisma.profile.upsert({
       where: {
         userId,
       },
@@ -28,11 +60,12 @@ export class ProfileService {
         bio: data.bio,
       },
       create: {
+        name: data.name,
         userId,
         bio: data.bio,
       },
     });
 
-    return profile;
+    return { message: 'Profile updated successfully' };
   }
 }
