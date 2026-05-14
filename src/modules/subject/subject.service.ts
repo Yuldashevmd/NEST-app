@@ -1,15 +1,22 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
-import { CreateSubjectDto } from './dto/create-subject.dto';
+import {
+  CreateSubjectDto,
+  CreateSubjectResponseDto,
+} from './dto/create-subject.dto';
 import { SubjectQueryDto } from './dto/query.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
+import { ReadSubjectsResponseDto } from './dto/read-subjects.dto';
+import { DeleteSubjectResponseDto } from './dto/delete-subject.dto';
 
 @Injectable()
 export class SubjectService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async subjects(query: SubjectQueryDto | undefined) {
-    return await this.prisma.subject.findMany({
+  async subjects(
+    query: SubjectQueryDto | undefined,
+  ): Promise<ReadSubjectsResponseDto> {
+    const subs = await this.prisma.subject.findMany({
       where: {
         title: {
           contains: query?.search,
@@ -23,10 +30,17 @@ export class SubjectService {
         },
       },
     });
+
+    return {
+      subjects: subs.map((item) => ({
+        ...item,
+        classes: item.classes.map((classItem) => classItem.class),
+      })),
+    };
   }
 
-  async create(dto: CreateSubjectDto) {
-    return await this.prisma.subject.create({
+  async create(dto: CreateSubjectDto): Promise<CreateSubjectResponseDto> {
+    await this.prisma.subject.create({
       data:
         dto.classIds?.length > 0
           ? {
@@ -45,18 +59,23 @@ export class SubjectService {
               title: dto.title,
             },
     });
+
+    return { message: 'Subject created successfully' };
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<DeleteSubjectResponseDto> {
     await this.prisma.subject.delete({
       where: {
         id,
       },
     });
-    return 'Subject deleted successfully';
+    return { message: 'Subject deleted successfully' };
   }
 
-  async update(id: string, dto: UpdateSubjectDto) {
+  async update(
+    id: string,
+    dto: UpdateSubjectDto,
+  ): Promise<CreateSubjectResponseDto> {
     const { classIds, ...data } = dto;
 
     const subject = await this.prisma.subject.findUnique({
@@ -67,7 +86,7 @@ export class SubjectService {
       throw new NotFoundException('Subject not found');
     }
 
-    return this.prisma.subject.update({
+    await this.prisma.subject.update({
       where: { id },
       data: {
         ...data,
@@ -83,5 +102,7 @@ export class SubjectService {
           : undefined,
       },
     });
+
+    return { message: 'Subject updated successfully' };
   }
 }

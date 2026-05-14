@@ -15,3 +15,11 @@ export class CreateSubjectDto {
   @IsOptional()
   classIds: string[];
 }
+
+export class CreateSubjectResponseDto {
+  @ApiProperty({
+    example: 'Subject created successfully',
+  })
+  @IsString()
+  message: string;
+}
