@@ -9,21 +9,24 @@ import {
   Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { ReadUserDto } from './dto/read-users.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateResponseDto, CreateUserDto } from './dto/create-user.dto';
+import { ReadUsersResponseDto } from './dto/read-users.dto';
+import { UpdateUserDto, UpdateUserResponseDto } from './dto/update-user.dto';
+import { ApiOkResponse } from '@nestjs/swagger';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  async create(@Body() dto: CreateUserDto): Promise<string> {
+  @ApiOkResponse({ type: CreateResponseDto })
+  async create(@Body() dto: CreateUserDto): Promise<{ message: string }> {
     return await this.userService.create(dto);
   }
 
   @Get()
-  async users(@Query() query: { name: string }): Promise<ReadUserDto[]> {
+  @ApiOkResponse({ type: ReadUsersResponseDto })
+  async users(@Query() query: { name: string }): Promise<ReadUsersResponseDto> {
     return await this.userService.users(query);
   }
 
@@ -33,15 +36,17 @@ export class UserController {
   }
 
   @Put(':id')
+  @ApiOkResponse({ type: UpdateUserResponseDto })
   async update(
     @Param('id') id: string,
     @Body() dto: UpdateUserDto,
-  ): Promise<string> {
+  ): Promise<{ message: string }> {
     return await this.userService.update(id, dto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<string> {
+  @ApiOkResponse({ example: { message: 'Sucessfully deleted' } })
+  async remove(@Param('id') id: string): Promise<{ message: string }> {
     return await this.userService.remove(id);
   }
 }

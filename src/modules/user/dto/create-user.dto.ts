@@ -19,8 +19,16 @@ export class CreateUserDto {
   password?: string;
 
   @IsOptional()
+  @IsString()
+  role?: string;
+
+  @IsOptional()
   @IsArray()
   @Type(() => String)
   @IsString({ each: true })
   classIds?: string[];
+}
+
+export class CreateResponseDto {
+  message: string;
 }

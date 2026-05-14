@@ -3,6 +3,7 @@ model User {
   name      String      @db.VarChar(100)
   password  String      @default("") @db.VarChar(255)
   email     String      @unique()
+  role      String      @default("USER") @db.VarChar(50)
   createdAt DateTime    @default(now()) @map("created_at")
   classes   UserClass[]
   posts     Post[]

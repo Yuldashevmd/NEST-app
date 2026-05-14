@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
+import { ReadUsersResponseDto } from './dto/read-users.dto';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateUserDto): Promise<string> {
+  async create(data: CreateUserDto): Promise<{ message: string }> {
     await this.prisma.user.create({
       data: {
         name: data.name,
@@ -22,10 +23,10 @@ export class UserService {
       include: { classes: { include: { class: true } } },
     });
 
-    return 'Sucessfully created';
+    return { message: 'Sucessfully created' };
   }
 
-  async users(query: { name: string }) {
+  async users(query: { name: string }): Promise<ReadUsersResponseDto> {
     const users = await this.prisma.user.findMany({
       where: {
         name: {
@@ -45,6 +46,7 @@ export class UserService {
               select: {
                 id: true,
                 title: true,
+                createdAt: true,
 
                 subjects: {
                   select: {
@@ -78,14 +80,30 @@ export class UserService {
       },
     });
 
-    return users;
+    return {
+      users: users.map((user) => ({
+        ...user,
+        classes: user.classes.map((item) => ({
+          id: item.class.id,
+          title: item.class.title,
+          createdAt: item.class.createdAt,
+          subjects: item.class.subjects.map((s) => ({
+            id: s.subject.id,
+            title: s.subject.title,
+          })),
+        })),
+      })),
+    };
   }
 
   async user(id: string) {
     return await this.prisma.user.findUnique({ where: { id } });
   }
 
-  async update(id: string, data: Partial<CreateUserDto>): Promise<string> {
+  async update(
+    id: string,
+    data: Partial<CreateUserDto>,
+  ): Promise<{ message: string }> {
     await this.prisma.user.update({
       where: { id },
       data: {
@@ -105,11 +123,11 @@ export class UserService {
           : {}),
       },
     });
-    return 'Sucessfully updated';
+    return { message: 'Sucessfully updated' };
   }
 
-  async remove(id: string): Promise<string> {
+  async remove(id: string): Promise<{ message: string }> {
     await this.prisma.user.delete({ where: { id } });
-    return 'Sucessfully deleted';
+    return { message: 'Sucessfully deleted' };
   }
 }
