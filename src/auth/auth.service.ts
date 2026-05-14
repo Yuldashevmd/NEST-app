@@ -23,7 +23,7 @@ export class AuthService {
       },
     });
 
-    return 'Successfully registered';
+    return { message: 'Successfully registered' };
   }
 
   async login(data: LoginDto) {

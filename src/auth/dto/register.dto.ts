@@ -15,3 +15,10 @@ export class RegisterDto {
   @ApiProperty()
   password!: string;
 }
+
+export class RegisterResponseDto {
+  @ApiProperty({
+    example: 'Successfully registered',
+  })
+  message: string;
+}
