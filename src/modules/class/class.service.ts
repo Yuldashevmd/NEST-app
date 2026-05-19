@@ -2,11 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { CreateClassDto } from './dto/create-class.dto';
 import { ReadClassDto } from './dto/read-class.dto';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
+import { ClassMessageResponseDto } from './dto/message-response.dto';
 
 @Injectable()
 export class ClassService {
   constructor(private readonly prisma: PrismaService) {}
-  async create(data: CreateClassDto): Promise<string> {
+  async create(data: CreateClassDto): Promise<ClassMessageResponseDto> {
     await this.prisma.class.create({
       data: {
         title: data.title,
@@ -22,7 +23,7 @@ export class ClassService {
       },
     });
 
-    return 'Successfully created';
+    return { message: 'Successfully created' };
   }
 
   async classes(query: { title?: string }): Promise<ReadClassDto[]> {
@@ -51,7 +52,10 @@ export class ClassService {
     return await this.prisma.class.findUnique({ where: { id } });
   }
 
-  async update(id: string, data: Partial<CreateClassDto>): Promise<string> {
+  async update(
+    id: string,
+    data: Partial<CreateClassDto>,
+  ): Promise<ClassMessageResponseDto> {
     await this.prisma.class.update({
       where: { id },
       data: {
@@ -69,11 +73,11 @@ export class ClassService {
       },
     });
 
-    return 'Successfully updated';
+    return { message: 'Successfully updated' };
   }
 
-  async remove(id: string): Promise<string> {
+  async remove(id: string): Promise<ClassMessageResponseDto> {
     await this.prisma.class.delete({ where: { id } });
-    return 'Sucessfully deleted';
+    return { message: 'Sucessfully deleted' };
   }
 }
