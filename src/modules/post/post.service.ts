@@ -9,10 +9,16 @@ import { PostMessageResponseDto } from './dto/message-response.dto';
 export class PostService {
   constructor(private prisma: PrismaService) {}
 
-  async posts(): Promise<ReadPostDto[]> {
+  async posts(userId: string): Promise<ReadPostDto[]> {
     return await this.prisma.post.findMany({
+      where: { userId },
       include: {
-        user: true,
+        user: {
+          select: {
+            name: true,
+            id: true,
+          },
+        },
       },
     });
   }
@@ -26,12 +32,15 @@ export class PostService {
     });
   }
 
-  async create(dto: CreatePostDto): Promise<PostMessageResponseDto> {
+  async create(
+    dto: CreatePostDto,
+    userId: string,
+  ): Promise<PostMessageResponseDto> {
     await this.prisma.post.create({
       data: {
         title: dto.title,
         content: dto.content,
-        user: { connect: { id: dto.userId } },
+        user: { connect: { id: userId } },
       },
     });
 
@@ -48,13 +57,14 @@ export class PostService {
   async update(
     id: string,
     dto: UpdatePostDto,
+    userId: string,
   ): Promise<PostMessageResponseDto> {
     await this.prisma.post.update({
       where: { id },
       data: {
         title: dto.title,
         content: dto.content,
-        user: { connect: { id: dto.userId } },
+        user: { connect: { id: userId } },
       },
     });
 

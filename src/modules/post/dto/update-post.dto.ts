@@ -14,8 +14,4 @@ export class UpdatePostDto {
   @IsString()
   @IsOptional()
   content?: string;
-
-  @ApiProperty()
-  @IsString()
-  userId: string;
 }

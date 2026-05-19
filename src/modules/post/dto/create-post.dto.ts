@@ -10,8 +10,4 @@ export class CreatePostDto {
   @IsString()
   @IsOptional()
   content: string;
-
-  @ApiProperty()
-  @IsString()
-  userId!: string;
 }
