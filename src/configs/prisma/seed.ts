@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../../../prisma/generated/prisma/client';
 import bcrypt from 'bcrypt';
+import { ROLE } from '../enums/role';
 
 dotenv.config();
 
@@ -20,7 +21,7 @@ async function main() {
     create: {
       name: 'Feya',
       email: 'feya@mail.ru',
-      role: 'ADMIN',
+      role: ROLE.ADMIN,
       password: hashedPassword,
     },
   });

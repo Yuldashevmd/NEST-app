@@ -7,6 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { ROLE } from 'src/configs/enums/role';
 
 export class CreateUserDto {
   @ApiProperty()
@@ -25,7 +26,7 @@ export class CreateUserDto {
   @ApiProperty()
   @IsOptional()
   @IsString()
-  role?: string;
+  role?: ROLE;
 
   @ApiProperty()
   @IsOptional()

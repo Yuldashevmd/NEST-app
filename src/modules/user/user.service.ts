@@ -13,6 +13,7 @@ export class UserService {
       data: {
         name: data.name,
         email: data.email,
+        role: data.role?.toUpperCase() || 'STUDENT',
         classes: data.classIds?.length
           ? {
               create: data.classIds.map((classId) => ({
@@ -39,6 +40,7 @@ export class UserService {
         id: true,
         name: true,
         email: true,
+        role: true,
         createdAt: true,
 
         classes: {
