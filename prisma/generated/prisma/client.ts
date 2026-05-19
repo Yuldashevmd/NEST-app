@@ -63,6 +63,11 @@ export type Profile = Prisma.ProfileModel
  */
 export type Subject = Prisma.SubjectModel
 /**
+ * Model Teacher_Subject
+ * 
+ */
+export type Teacher_Subject = Prisma.Teacher_SubjectModel
+/**
  * Model UserClass
  * 
  */

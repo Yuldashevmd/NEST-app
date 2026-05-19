@@ -389,6 +389,7 @@ export const ModelName = {
   Post: 'Post',
   Profile: 'Profile',
   Subject: 'Subject',
+  Teacher_Subject: 'Teacher_Subject',
   UserClass: 'UserClass',
   User: 'User'
 } as const
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "class" | "class_Subject" | "post" | "profile" | "subject" | "userClass" | "user"
+    modelProps: "class" | "class_Subject" | "post" | "profile" | "subject" | "teacher_Subject" | "userClass" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -780,6 +781,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Teacher_Subject: {
+      payload: Prisma.$Teacher_SubjectPayload<ExtArgs>
+      fields: Prisma.Teacher_SubjectFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.Teacher_SubjectFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.Teacher_SubjectFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>
+        }
+        findFirst: {
+          args: Prisma.Teacher_SubjectFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.Teacher_SubjectFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>
+        }
+        findMany: {
+          args: Prisma.Teacher_SubjectFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>[]
+        }
+        create: {
+          args: Prisma.Teacher_SubjectCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>
+        }
+        createMany: {
+          args: Prisma.Teacher_SubjectCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.Teacher_SubjectCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>[]
+        }
+        delete: {
+          args: Prisma.Teacher_SubjectDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>
+        }
+        update: {
+          args: Prisma.Teacher_SubjectUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>
+        }
+        deleteMany: {
+          args: Prisma.Teacher_SubjectDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.Teacher_SubjectUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.Teacher_SubjectUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>[]
+        }
+        upsert: {
+          args: Prisma.Teacher_SubjectUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Teacher_SubjectPayload>
+        }
+        aggregate: {
+          args: Prisma.Teacher_SubjectAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTeacher_Subject>
+        }
+        groupBy: {
+          args: Prisma.Teacher_SubjectGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Teacher_SubjectGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.Teacher_SubjectCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Teacher_SubjectCountAggregateOutputType> | number
+        }
+      }
+    }
     UserClass: {
       payload: Prisma.$UserClassPayload<ExtArgs>
       fields: Prisma.UserClassFieldRefs
@@ -1016,6 +1091,15 @@ export const SubjectScalarFieldEnum = {
 export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
 
 
+export const Teacher_SubjectScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  subjectId: 'subjectId'
+} as const
+
+export type Teacher_SubjectScalarFieldEnum = (typeof Teacher_SubjectScalarFieldEnum)[keyof typeof Teacher_SubjectScalarFieldEnum]
+
+
 export const UserClassScalarFieldEnum = {
   id: 'id',
   classId: 'classId',
@@ -1208,6 +1292,7 @@ export type GlobalOmitConfig = {
   post?: Prisma.PostOmit
   profile?: Prisma.ProfileOmit
   subject?: Prisma.SubjectOmit
+  teacher_Subject?: Prisma.Teacher_SubjectOmit
   userClass?: Prisma.UserClassOmit
   user?: Prisma.UserOmit
 }

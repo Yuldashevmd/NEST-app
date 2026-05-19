@@ -1,8 +1,9 @@
 model Subject {
-  id        String   @id @default(cuid()) @db.VarChar(50)
-  title     String   @db.VarChar(100)
-  createdAt DateTime @default(now()) @map("created_at")
+  id        String            @id @default(cuid()) @db.VarChar(50)
+  title     String            @db.VarChar(100)
+  createdAt DateTime          @default(now()) @map("created_at")
   classes   Class_Subject[]
+  teachers   Teacher_Subject[]
 
   @@map("subjects")
 }

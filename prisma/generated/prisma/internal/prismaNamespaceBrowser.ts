@@ -56,6 +56,7 @@ export const ModelName = {
   Post: 'Post',
   Profile: 'Profile',
   Subject: 'Subject',
+  Teacher_Subject: 'Teacher_Subject',
   UserClass: 'UserClass',
   User: 'User'
 } as const
@@ -123,6 +124,15 @@ export const SubjectScalarFieldEnum = {
 } as const
 
 export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
+
+
+export const Teacher_SubjectScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  subjectId: 'subjectId'
+} as const
+
+export type Teacher_SubjectScalarFieldEnum = (typeof Teacher_SubjectScalarFieldEnum)[keyof typeof Teacher_SubjectScalarFieldEnum]
 
 
 export const UserClassScalarFieldEnum = {

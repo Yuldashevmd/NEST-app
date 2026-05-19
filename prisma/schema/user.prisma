@@ -1,13 +1,14 @@
 model User {
-  id        String      @id @default(cuid()) @db.VarChar(50)
-  name      String      @db.VarChar(100)
-  password  String      @default("") @db.VarChar(255)
-  email     String      @unique()
-  role      String      @default("USER") @db.VarChar(50)
-  createdAt DateTime    @default(now()) @map("created_at")
+  id        String            @id @default(cuid()) @db.VarChar(50)
+  name      String            @db.VarChar(100)
+  password  String            @default("") @db.VarChar(255)
+  email     String            @unique()
+  role      String            @default("USER") @db.VarChar(50)
+  createdAt DateTime          @default(now()) @map("created_at")
   classes   UserClass[]
   posts     Post[]
   profile   Profile?
+  subjects  Teacher_Subject[]
 
   @@map("users")
 }
