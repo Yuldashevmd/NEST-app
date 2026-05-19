@@ -3,6 +3,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { ReadPostDto } from './dto/read-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
+import { PostMessageResponseDto } from './dto/message-response.dto';
 
 @Injectable()
 export class PostService {
@@ -15,6 +16,7 @@ export class PostService {
       },
     });
   }
+
   async post(id: string): Promise<ReadPostDto | null> {
     return await this.prisma.post.findUnique({
       where: { id },
@@ -24,7 +26,7 @@ export class PostService {
     });
   }
 
-  async create(dto: CreatePostDto): Promise<string> {
+  async create(dto: CreatePostDto): Promise<PostMessageResponseDto> {
     await this.prisma.post.create({
       data: {
         title: dto.title,
@@ -33,15 +35,20 @@ export class PostService {
       },
     });
 
-    return 'Post created successfully';
+    return {
+      message: 'Post created successfully',
+    };
   }
 
-  async delete(id: string): Promise<string> {
+  async delete(id: string): Promise<PostMessageResponseDto> {
     await this.prisma.post.delete({ where: { id } });
-    return 'Post deleted successfully';
+    return { message: 'Post deleted successfully' };
   }
 
-  async update(id: string, dto: UpdatePostDto): Promise<string> {
+  async update(
+    id: string,
+    dto: UpdatePostDto,
+  ): Promise<PostMessageResponseDto> {
     await this.prisma.post.update({
       where: { id },
       data: {
@@ -51,6 +58,6 @@ export class PostService {
       },
     });
 
-    return 'Post updated successfully';
+    return { message: 'Post updated successfully' };
   }
 }

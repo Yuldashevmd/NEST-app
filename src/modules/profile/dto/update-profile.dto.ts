@@ -14,9 +14,3 @@ export class UpdateProfileDto {
   @IsOptional()
   name?: string;
 }
-
-export class UpdateProfileResponseDto {
-  @ApiProperty()
-  @IsString()
-  message: string;
-}

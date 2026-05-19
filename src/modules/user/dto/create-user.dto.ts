@@ -34,9 +34,3 @@ export class CreateUserDto {
   @IsString({ each: true })
   classIds?: string[];
 }
-
-export class CreateResponseDto {
-  @ApiProperty({ example: 'User created successfully' })
-  @IsString()
-  message: string;
-}

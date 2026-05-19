@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
 export class UpdateSubjectDto {
@@ -12,12 +12,4 @@ export class UpdateSubjectDto {
   @IsOptional()
   @IsString({ each: true })
   classIds?: string[];
-}
-
-export class UpdateSubjectResponseDto {
-  @ApiProperty({
-    example: 'Successfully updated',
-  })
-  @IsString()
-  message: string;
 }

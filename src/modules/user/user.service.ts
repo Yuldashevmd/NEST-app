@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CreateResponseDto, CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
 import { ReadUsersResponseDto } from './dto/read-users.dto';
-import { DeleteUserResponseDto } from './dto/delete-user.dto';
-import { UpdateUserResponseDto } from './dto/update-user.dto';
+import { UserMessageResponseDto } from './dto/message-response.dto';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateUserDto): Promise<CreateResponseDto> {
+  async create(data: CreateUserDto): Promise<UserMessageResponseDto> {
     await this.prisma.user.create({
       data: {
         name: data.name,
@@ -105,7 +104,7 @@ export class UserService {
   async update(
     id: string,
     data: Partial<CreateUserDto>,
-  ): Promise<UpdateUserResponseDto> {
+  ): Promise<UserMessageResponseDto> {
     await this.prisma.user.update({
       where: { id },
       data: {
@@ -128,7 +127,7 @@ export class UserService {
     return { message: 'Sucessfully updated' };
   }
 
-  async remove(id: string): Promise<DeleteUserResponseDto> {
+  async remove(id: string): Promise<UserMessageResponseDto> {
     await this.prisma.user.delete({ where: { id } });
     return { message: 'Sucessfully deleted' };
   }

@@ -1,14 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import {
-  UpdateProfileDto,
-  UpdateProfileResponseDto,
-} from './dto/update-profile.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
 import { ReadProfileDto } from './dto/read-profile.dto';
-import {
-  CreateProfileDto,
-  CreateProfileResponseDto,
-} from './dto/create-profile.dto';
+import { CreateProfileDto } from './dto/create-profile.dto';
+import { ProfileMessageResponseDto } from './dto/message-response.dto';
 
 @Injectable()
 export class ProfileService {
@@ -16,7 +11,7 @@ export class ProfileService {
 
   async createProfile(
     data: CreateProfileDto,
-  ): Promise<CreateProfileResponseDto> {
+  ): Promise<ProfileMessageResponseDto> {
     await this.prisma.profile.create({
       data,
       include: {
@@ -51,7 +46,7 @@ export class ProfileService {
   async updateProfile(
     userId: string,
     data: UpdateProfileDto,
-  ): Promise<UpdateProfileResponseDto> {
+  ): Promise<ProfileMessageResponseDto> {
     await this.prisma.profile.upsert({
       where: {
         userId,

@@ -1,15 +1,10 @@
 import { Body, Controller, Get, Post, Put, Req } from '@nestjs/common';
 import { ProfileService } from './profile.service';
-import {
-  UpdateProfileDto,
-  UpdateProfileResponseDto,
-} from './dto/update-profile.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { ReadProfileDto } from './dto/read-profile.dto';
-import {
-  CreateProfileDto,
-  CreateProfileResponseDto,
-} from './dto/create-profile.dto';
+import { CreateProfileDto } from './dto/create-profile.dto';
+import { ProfileMessageResponseDto } from './dto/message-response.dto';
 
 type RequestWithUser = Request & {
   user: {
@@ -23,10 +18,10 @@ export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Post()
-  @ApiOkResponse({ type: CreateProfileResponseDto })
+  @ApiOkResponse({ type: ProfileMessageResponseDto })
   async createProfile(
     @Body() dto: CreateProfileDto,
-  ): Promise<CreateProfileResponseDto> {
+  ): Promise<ProfileMessageResponseDto> {
     return this.profileService.createProfile(dto);
   }
 
@@ -39,11 +34,11 @@ export class ProfileController {
   }
 
   @Put()
-  @ApiOkResponse({ type: UpdateProfileDto })
+  @ApiOkResponse({ type: ProfileMessageResponseDto })
   updateProfile(
     @Body() dto: UpdateProfileDto,
     @Req() req: RequestWithUser,
-  ): Promise<UpdateProfileResponseDto> {
+  ): Promise<ProfileMessageResponseDto> {
     return this.profileService.updateProfile(req.user.sub, dto);
   }
 }

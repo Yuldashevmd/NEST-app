@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
-export class DeleteUserResponseDto {
-  @ApiProperty({ example: 'Successfully deleted' })
+export class SubjectMessageResponseDto {
+  @ApiProperty()
   @IsString()
   message: string;
 }

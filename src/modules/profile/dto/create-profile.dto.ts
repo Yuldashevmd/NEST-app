@@ -15,9 +15,3 @@ export class CreateProfileDto {
   @IsString()
   userId: string;
 }
-
-export class CreateProfileResponseDto {
-  @ApiProperty({ example: 'Profile created successfully' })
-  @IsString()
-  message: string;
-}
