@@ -10,8 +10,4 @@ export class CreateProfileDto {
   @ApiProperty()
   @IsString()
   bio: string;
-
-  @ApiProperty()
-  @IsString()
-  userId: string;
 }

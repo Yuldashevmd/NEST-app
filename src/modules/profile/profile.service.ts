@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
 import { ReadProfileDto } from './dto/read-profile.dto';
@@ -11,13 +11,29 @@ export class ProfileService {
 
   async createProfile(
     data: CreateProfileDto,
+    userId: string,
   ): Promise<ProfileMessageResponseDto> {
-    await this.prisma.profile.create({
-      data,
-      include: {
-        user: true,
+    const existingProfile = await this.prisma.profile.findUnique({
+      where: {
+        userId,
       },
     });
+
+    if (existingProfile) {
+      throw new ConflictException('Profile already exists');
+    }
+
+    await this.prisma.profile.create({
+      data: {
+        ...data,
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
+
     return {
       message: 'Profile created successfully',
     };

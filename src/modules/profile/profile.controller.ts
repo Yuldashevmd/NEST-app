@@ -21,8 +21,9 @@ export class ProfileController {
   @ApiOkResponse({ type: ProfileMessageResponseDto })
   async createProfile(
     @Body() dto: CreateProfileDto,
+    @Req() req: RequestWithUser,
   ): Promise<ProfileMessageResponseDto> {
-    return this.profileService.createProfile(dto);
+    return this.profileService.createProfile(dto, req.user.sub);
   }
 
   @Get()
