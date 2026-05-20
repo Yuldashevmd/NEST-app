@@ -8,6 +8,7 @@ import {
   Query,
   Put,
   Req,
+  ForbiddenException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,7 +18,7 @@ import { ApiOkResponse } from '@nestjs/swagger';
 import { UserMessageResponseDto } from './dto/message-response.dto';
 import { ROLE } from 'src/configs/enums/role';
 
-type RequestWithUser = Request & { user: { id: string; role: ROLE } };
+type RequestWithUser = Request & { user: { sub: string; role: ROLE } };
 
 @Controller('users')
 export class UserController {
@@ -29,9 +30,9 @@ export class UserController {
     @Body() dto: CreateUserDto,
     @Req() req: RequestWithUser,
   ): Promise<UserMessageResponseDto> {
-    console.log(req.user);
-    if (req.user.role !== ROLE.ADMIN)
-      return { message: 'Only admin can create users' };
+    if (req.user.role !== ROLE.ADMIN) {
+      throw new ForbiddenException('Only admin can create users');
+    }
     return await this.userService.create(dto);
   }
 
@@ -53,8 +54,9 @@ export class UserController {
     @Body() dto: UpdateUserDto,
     @Req() req: RequestWithUser,
   ): Promise<UserMessageResponseDto> {
-    if (req.user.role !== ROLE.ADMIN)
-      return { message: 'Only admin can update users' };
+    if (req.user.role !== ROLE.ADMIN && req.user.sub !== id) {
+      throw new ForbiddenException('Only admin or owner can update users');
+    }
     return await this.userService.update(id, dto);
   }
 
@@ -64,8 +66,9 @@ export class UserController {
     @Param('id') id: string,
     @Req() req: RequestWithUser,
   ): Promise<UserMessageResponseDto> {
-    if (req.user.role !== ROLE.ADMIN)
-      return { message: 'Only admin can delete users' };
+    if (req.user.role !== ROLE.ADMIN) {
+      throw new ForbiddenException('Only admin can delete users');
+    }
     return await this.userService.remove(id);
   }
 }

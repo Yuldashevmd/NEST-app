@@ -3,17 +3,21 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/configs/prisma/prisma.service';
 import { ReadUsersResponseDto } from './dto/read-users.dto';
 import { UserMessageResponseDto } from './dto/message-response.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async create(data: CreateUserDto): Promise<UserMessageResponseDto> {
+    const hashedPassword = await bcrypt.hash(data.password || '123456', 10);
+
     await this.prisma.user.create({
       data: {
         name: data.name,
         email: data.email,
         role: data.role?.toUpperCase() || 'STUDENT',
+        password: hashedPassword,
         classes: data.classIds?.length
           ? {
               create: data.classIds.map((classId) => ({
