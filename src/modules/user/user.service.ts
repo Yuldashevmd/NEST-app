@@ -18,6 +18,12 @@ export class UserService {
         email: data.email,
         role: data.role?.toUpperCase() || 'STUDENT',
         password: hashedPassword,
+        profile: {
+          create: {
+            name: data.name,
+            bio: 'Hello my name is ' + data.name,
+          },
+        },
         classes: data.classIds?.length
           ? {
               create: data.classIds.map((classId) => ({
@@ -26,7 +32,10 @@ export class UserService {
             }
           : undefined,
       },
-      include: { classes: { include: { class: true } } },
+      include: {
+        profile: true,
+        classes: { include: { class: true } },
+      },
     });
 
     return { message: 'Sucessfully created' };
