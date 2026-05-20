@@ -29,6 +29,7 @@ export class UserController {
     @Body() dto: CreateUserDto,
     @Req() req: RequestWithUser,
   ): Promise<UserMessageResponseDto> {
+    console.log(req.user);
     if (req.user.role !== ROLE.ADMIN)
       return { message: 'Only admin can create users' };
     return await this.userService.create(dto);
