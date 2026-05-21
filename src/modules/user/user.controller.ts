@@ -17,6 +17,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { UserMessageResponseDto } from './dto/message-response.dto';
 import { ROLE } from 'src/configs/enums/role';
+import { Roles } from 'src/configs/decorators/roles.decorator';
 
 type RequestWithUser = Request & { user: { sub: string; role: ROLE } };
 
@@ -25,14 +26,9 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
+  @Roles(ROLE.ADMIN)
   @ApiOkResponse({ type: UserMessageResponseDto })
-  async create(
-    @Body() dto: CreateUserDto,
-    @Req() req: RequestWithUser,
-  ): Promise<UserMessageResponseDto> {
-    if (req.user.role !== ROLE.ADMIN) {
-      throw new ForbiddenException('Only admin can create users');
-    }
+  async create(@Body() dto: CreateUserDto): Promise<UserMessageResponseDto> {
     return await this.userService.create(dto);
   }
 
@@ -61,6 +57,7 @@ export class UserController {
   }
 
   @Delete(':id')
+  @Roles(ROLE.ADMIN)
   @ApiOkResponse({ type: UserMessageResponseDto })
   async remove(
     @Param('id') id: string,

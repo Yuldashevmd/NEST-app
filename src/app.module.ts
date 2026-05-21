@@ -8,6 +8,7 @@ import { PostModule } from './modules/post/post.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { UserModule } from './modules/user/user.module';
 import { SubjectModule } from './modules/subject/subject.module';
+import { RolesGuard } from './configs/guards/roles.guard';
 
 @Module({
   imports: [
@@ -23,6 +24,10 @@ import { SubjectModule } from './modules/subject/subject.module';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })

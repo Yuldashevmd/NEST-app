@@ -8,10 +8,12 @@ import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
+import { ROLE } from '../enums/role';
 
-type JwtPayload = {
+export type JwtPayload = {
   sub: number;
   email: string;
+  role: ROLE;
 };
 
 @Injectable()

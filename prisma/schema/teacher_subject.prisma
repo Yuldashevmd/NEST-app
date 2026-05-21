@@ -6,5 +6,5 @@ model Teacher_Subject {
   subjectId String  @map("subject_id")
 
   @@unique([subjectId, userId])
-  @@map("teacher_classes")
+  @@map("teacher_subject")
 }
