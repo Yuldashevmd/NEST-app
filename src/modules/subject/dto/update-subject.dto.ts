@@ -12,4 +12,12 @@ export class UpdateSubjectDto {
   @IsOptional()
   @IsString({ each: true })
   classIds?: string[];
+
+  @IsOptional()
+  @ApiPropertyOptional({
+    example: ['teacherId1', 'teacherId2'],
+    description: 'The IDs of the teachers associated with the subject',
+  })
+  @IsString({ each: true })
+  teachers?: string[];
 }

@@ -33,4 +33,11 @@ export class CreateUserDto {
   @Type(() => String)
   @IsString({ each: true })
   classIds?: string[];
+
+  @ApiProperty()
+  @IsOptional()
+  @IsArray()
+  @Type(() => String)
+  @IsString({ each: true })
+  subjectIds?: string[];
 }

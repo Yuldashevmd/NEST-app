@@ -62,23 +62,27 @@ export class SubjectService {
 
   async create(dto: CreateSubjectDto): Promise<SubjectMessageResponseDto> {
     await this.prisma.subject.create({
-      data:
-        dto.classIds?.length > 0
+      data: {
+        title: dto.title,
+        ...(dto.teachers?.length
           ? {
-              title: dto.title,
-              classes: {
-                create: dto.classIds.map((classId) => ({
-                  class: {
-                    connect: {
-                      id: classId,
-                    },
-                  },
+              teachers: {
+                create: dto.teachers.map((userId) => ({
+                  user: { connect: { id: userId } },
                 })),
               },
             }
-          : {
-              title: dto.title,
-            },
+          : {}),
+        ...(dto.classIds?.length
+          ? {
+              classes: {
+                create: dto.classIds.map((classId) => ({
+                  class: { connect: { id: classId } },
+                })),
+              },
+            }
+          : {}),
+      },
     });
 
     return { message: 'Subject created successfully' };
@@ -97,7 +101,7 @@ export class SubjectService {
     id: string,
     dto: UpdateSubjectDto,
   ): Promise<SubjectMessageResponseDto> {
-    const { classIds, ...data } = dto;
+    const { classIds, teachers, ...data } = dto;
 
     const subject = await this.prisma.subject.findUnique({
       where: { id },
@@ -111,16 +115,26 @@ export class SubjectService {
       where: { id },
       data: {
         ...data,
-        classes: classIds
+        ...(teachers
           ? {
-              deleteMany: {},
-              create: classIds.map((classId) => ({
-                class: {
-                  connect: { id: classId },
-                },
-              })),
+              teachers: {
+                deleteMany: {},
+                create: teachers.map((userId) => ({
+                  user: { connect: { id: userId } },
+                })),
+              },
             }
-          : undefined,
+          : {}),
+        ...(classIds
+          ? {
+              classes: {
+                deleteMany: {},
+                create: classIds.map((classId) => ({
+                  class: { connect: { id: classId } },
+                })),
+              },
+            }
+          : {}),
       },
     });
 

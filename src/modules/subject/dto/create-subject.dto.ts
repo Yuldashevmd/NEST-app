@@ -14,4 +14,12 @@ export class CreateSubjectDto {
   })
   @IsOptional()
   classIds: string[];
+
+  @IsOptional()
+  @ApiProperty({
+    example: ['teacherId1', 'teacherId2'],
+    description: 'The IDs of the teachers associated with the subject',
+  })
+  @IsString({ each: true })
+  teachers: string[];
 }

@@ -24,6 +24,13 @@ export class UserService {
             bio: 'Hello my name is ' + data.name,
           },
         },
+        subjects: data.subjectIds?.length
+          ? {
+              create: data.subjectIds.map((subjectId) => ({
+                subject: { connect: { id: subjectId } },
+              })),
+            }
+          : undefined,
         classes: data.classIds?.length
           ? {
               create: data.classIds.map((classId) => ({
@@ -35,6 +42,7 @@ export class UserService {
       include: {
         profile: true,
         classes: { include: { class: true } },
+        subjects: { include: { subject: true } },
       },
     });
 
@@ -125,6 +133,15 @@ export class UserService {
       data: {
         name: data.name,
         email: data.email,
+        role: data.role?.toUpperCase(),
+        subjects: data.subjectIds?.length
+          ? {
+              deleteMany: {},
+              create: data.subjectIds.map((subjectId) => ({
+                subject: { connect: { id: subjectId } },
+              })),
+            }
+          : {},
         ...(data.classIds
           ? {
               classes: {
