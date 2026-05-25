@@ -14,12 +14,15 @@ import { UpdateClassDto } from './dto/update-class.dto';
 import { ReadClassDto } from './dto/read-class.dto';
 import { ClassMessageResponseDto } from './dto/message-response.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
+import { ROLE } from 'src/configs/enums/role';
+import { Roles } from 'src/configs/decorators/roles.decorator';
 
 @Controller('class')
 export class ClassController {
   constructor(private readonly classService: ClassService) {}
 
   @ApiOkResponse({ type: ClassMessageResponseDto })
+  @Roles(ROLE.ADMIN)
   @Post()
   async create(
     @Body() createClassDto: CreateClassDto,
@@ -38,6 +41,7 @@ export class ClassController {
   }
 
   @ApiOkResponse({ type: ClassMessageResponseDto })
+  @Roles(ROLE.ADMIN)
   @Put(':id')
   async update(
     @Param('id') id: string,
@@ -47,6 +51,7 @@ export class ClassController {
   }
 
   @ApiOkResponse({ type: ClassMessageResponseDto })
+  @Roles(ROLE.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string): Promise<ClassMessageResponseDto> {
     return this.classService.remove(id);

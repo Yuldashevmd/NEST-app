@@ -11,15 +11,6 @@ export class ClassService {
     await this.prisma.class.create({
       data: {
         title: data.title,
-        users: data.userIds?.length
-          ? {
-              create: data.userIds.map((userId) => ({
-                user: {
-                  connect: { id: userId },
-                },
-              })),
-            }
-          : undefined,
       },
     });
 

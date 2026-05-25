@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsString, MaxLength } from 'class-validator';
+import { IsArray, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateClassDto {
   @ApiProperty({
@@ -9,7 +9,7 @@ export class CreateClassDto {
   @MaxLength(50)
   title: string;
 
-  @ApiProperty()
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
   userIds: string[];
