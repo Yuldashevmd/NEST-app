@@ -19,6 +19,7 @@ export class SubjectService {
           contains: query?.search,
         },
       },
+
       include: {
         classes: {
           include: {

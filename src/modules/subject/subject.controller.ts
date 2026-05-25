@@ -14,6 +14,8 @@ import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { ReadSubjectsResponseDto } from './dto/read-subjects.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { SubjectMessageResponseDto } from './dto/message-response.dto';
+import { Roles } from 'src/configs/decorators/roles.decorator';
+import { ROLE } from 'src/configs/enums/role';
 
 @Controller('subject')
 export class SubjectController {
@@ -28,6 +30,7 @@ export class SubjectController {
   }
 
   @Post()
+  @Roles(ROLE.ADMIN)
   @ApiOkResponse({ type: SubjectMessageResponseDto })
   async create(
     @Body() dto: CreateSubjectDto,
@@ -36,6 +39,7 @@ export class SubjectController {
   }
 
   @Put(':id')
+  @Roles(ROLE.ADMIN)
   @ApiOkResponse({ type: SubjectMessageResponseDto })
   async update(
     @Body() dto: UpdateSubjectDto,
@@ -45,6 +49,7 @@ export class SubjectController {
   }
 
   @Delete(':id')
+  @Roles(ROLE.ADMIN)
   @ApiOkResponse({ type: SubjectMessageResponseDto })
   async delete(@Query('id') id: string) {
     return await this.subjectService.delete(id);

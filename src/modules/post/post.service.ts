@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { ReadPostDto } from './dto/read-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -49,7 +53,14 @@ export class PostService {
     };
   }
 
-  async delete(id: string): Promise<PostMessageResponseDto> {
+  async delete(id: string, userId: string): Promise<PostMessageResponseDto> {
+    const post = await this.prisma.post.findUnique({ where: { id } });
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+    if (post.userId !== userId) {
+      throw new ForbiddenException('Only the owner can delete this post');
+    }
     await this.prisma.post.delete({ where: { id } });
     return { message: 'Post deleted successfully' };
   }
@@ -59,12 +70,19 @@ export class PostService {
     dto: UpdatePostDto,
     userId: string,
   ): Promise<PostMessageResponseDto> {
+    const post = await this.prisma.post.findUnique({ where: { id } });
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    if (post.userId !== userId) {
+      throw new ForbiddenException('Only the owner can update this post');
+    }
     await this.prisma.post.update({
       where: { id },
       data: {
         title: dto.title,
         content: dto.content,
-        user: { connect: { id: userId } },
       },
     });
 

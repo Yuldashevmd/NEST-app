@@ -40,8 +40,11 @@ export class PostController {
 
   @ApiOkResponse({ type: PostMessageResponseDto })
   @Delete(':id')
-  async delete(@Body() id: string): Promise<PostMessageResponseDto> {
-    return await this.postService.delete(id);
+  async delete(
+    @Body() id: string,
+    @Req() req: RequestWithUser,
+  ): Promise<PostMessageResponseDto> {
+    return await this.postService.delete(id, req.user.sub);
   }
 
   @ApiOkResponse({ type: PostMessageResponseDto })
