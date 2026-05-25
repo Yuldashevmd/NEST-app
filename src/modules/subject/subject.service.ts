@@ -5,6 +5,8 @@ import { SubjectQueryDto } from './dto/query.dto';
 import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { ReadSubjectsResponseDto } from './dto/read-subjects.dto';
 import { SubjectMessageResponseDto } from './dto/message-response.dto';
+import { ROLE } from 'src/configs/enums/role';
+import { Prisma } from 'prisma/generated/prisma/client';
 
 @Injectable()
 export class SubjectService {
@@ -12,18 +14,35 @@ export class SubjectService {
 
   async subjects(
     query: SubjectQueryDto | undefined,
+    userId?: string,
+    userRole?: string,
   ): Promise<ReadSubjectsResponseDto> {
-    const subs = await this.prisma.subject.findMany({
-      where: {
-        title: {
-          contains: query?.search,
-        },
-      },
+    const where: Prisma.SubjectWhereInput = {
+      title: { contains: query?.search },
+    };
 
+    // teacher bo'lsa, faqat o'ziga tegishli subjectlar
+    if (userRole === ROLE.TEACHER) {
+      where.teachers = {
+        some: { userId },
+      };
+    }
+
+    const subs = await this.prisma.subject.findMany({
+      where,
       include: {
+        teachers: {
+          include: { user: true },
+        },
         classes: {
           include: {
-            class: true,
+            class: {
+              include: {
+                users: {
+                  include: { user: true },
+                },
+              },
+            },
           },
         },
       },
@@ -32,7 +51,11 @@ export class SubjectService {
     return {
       subjects: subs.map((item) => ({
         ...item,
-        classes: item.classes.map((classItem) => classItem.class),
+        teachers: item.teachers.map((t) => t.user),
+        classes: item.classes.map((c) => ({
+          ...c.class,
+          users: c.class.users.map((u) => u.user),
+        })),
       })),
     };
   }

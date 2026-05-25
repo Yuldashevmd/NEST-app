@@ -6,6 +6,7 @@ import {
   Post,
   Put,
   Query,
+  Req,
 } from '@nestjs/common';
 import { SubjectService } from './subject.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
@@ -17,6 +18,8 @@ import { SubjectMessageResponseDto } from './dto/message-response.dto';
 import { Roles } from 'src/configs/decorators/roles.decorator';
 import { ROLE } from 'src/configs/enums/role';
 
+type RequestWithUser = Request & { user: { sub: string; role: ROLE } };
+
 @Controller('subject')
 export class SubjectController {
   constructor(private subjectService: SubjectService) {}
@@ -25,8 +28,11 @@ export class SubjectController {
   @ApiOkResponse({ type: ReadSubjectsResponseDto })
   async subjects(
     @Query() query?: SubjectQueryDto,
+    @Req() req?: RequestWithUser,
   ): Promise<ReadSubjectsResponseDto> {
-    return await this.subjectService.subjects(query);
+    const userId = req?.user?.sub;
+    const userRole = req?.user?.role;
+    return await this.subjectService.subjects(query, userId, userRole);
   }
 
   @Post()
