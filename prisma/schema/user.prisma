@@ -10,5 +10,8 @@ model User {
   profile   Profile?
   subjects  Teacher_Subject[]
 
+  studentGrades Student_Grade[] @relation("StudentGrades")
+  teacherGrades Student_Grade[] @relation("TeacherGrades")
+
   @@map("users")
 }

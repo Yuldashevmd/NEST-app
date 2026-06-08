@@ -101,6 +101,32 @@ export class UserService {
             bio: true,
           },
         },
+
+        studentGrades: {
+          select: {
+            id: true,
+            grade: true,
+            createdAt: true,
+            gradeType: true,
+            class_subject: {
+              select: {
+                id: true,
+                class: {
+                  select: {
+                    id: true,
+                    title: true,
+                  },
+                },
+                subject: {
+                  select: {
+                    id: true,
+                    title: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     });
 

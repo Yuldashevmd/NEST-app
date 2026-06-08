@@ -194,6 +194,8 @@ export type UserWhereInput = {
   posts?: Prisma.PostListRelationFilter
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
   subjects?: Prisma.Teacher_SubjectListRelationFilter
+  studentGrades?: Prisma.Student_GradeListRelationFilter
+  teacherGrades?: Prisma.Student_GradeListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -207,6 +209,8 @@ export type UserOrderByWithRelationInput = {
   posts?: Prisma.PostOrderByRelationAggregateInput
   profile?: Prisma.ProfileOrderByWithRelationInput
   subjects?: Prisma.Teacher_SubjectOrderByRelationAggregateInput
+  studentGrades?: Prisma.Student_GradeOrderByRelationAggregateInput
+  teacherGrades?: Prisma.Student_GradeOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -223,6 +227,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   posts?: Prisma.PostListRelationFilter
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
   subjects?: Prisma.Teacher_SubjectListRelationFilter
+  studentGrades?: Prisma.Student_GradeListRelationFilter
+  teacherGrades?: Prisma.Student_GradeListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -260,6 +266,8 @@ export type UserCreateInput = {
   posts?: Prisma.PostCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   subjects?: Prisma.Teacher_SubjectCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeCreateNestedManyWithoutTeacherInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -273,6 +281,8 @@ export type UserUncheckedCreateInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   subjects?: Prisma.Teacher_SubjectUncheckedCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutTeacherInput
 }
 
 export type UserUpdateInput = {
@@ -286,6 +296,8 @@ export type UserUpdateInput = {
   posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   subjects?: Prisma.Teacher_SubjectUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUpdateManyWithoutTeacherNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -299,6 +311,8 @@ export type UserUncheckedUpdateInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   subjects?: Prisma.Teacher_SubjectUncheckedUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutTeacherNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -388,6 +402,34 @@ export type UserUpdateOneRequiredWithoutProfileNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProfileInput, Prisma.UserUpdateWithoutProfileInput>, Prisma.UserUncheckedUpdateWithoutProfileInput>
 }
 
+export type UserCreateNestedOneWithoutStudentGradesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStudentGradesInput, Prisma.UserUncheckedCreateWithoutStudentGradesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStudentGradesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutTeacherGradesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeacherGradesInput, Prisma.UserUncheckedCreateWithoutTeacherGradesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeacherGradesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStudentGradesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStudentGradesInput, Prisma.UserUncheckedCreateWithoutStudentGradesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStudentGradesInput
+  upsert?: Prisma.UserUpsertWithoutStudentGradesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStudentGradesInput, Prisma.UserUpdateWithoutStudentGradesInput>, Prisma.UserUncheckedUpdateWithoutStudentGradesInput>
+}
+
+export type UserUpdateOneRequiredWithoutTeacherGradesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeacherGradesInput, Prisma.UserUncheckedCreateWithoutTeacherGradesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeacherGradesInput
+  upsert?: Prisma.UserUpsertWithoutTeacherGradesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTeacherGradesInput, Prisma.UserUpdateWithoutTeacherGradesInput>, Prisma.UserUncheckedUpdateWithoutTeacherGradesInput>
+}
+
 export type UserCreateNestedOneWithoutSubjectsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSubjectsInput, Prisma.UserUncheckedCreateWithoutSubjectsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubjectsInput
@@ -426,6 +468,8 @@ export type UserCreateWithoutPostsInput = {
   classes?: Prisma.UserClassCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   subjects?: Prisma.Teacher_SubjectCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeCreateNestedManyWithoutTeacherInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -438,6 +482,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   classes?: Prisma.UserClassUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   subjects?: Prisma.Teacher_SubjectUncheckedCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutTeacherInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -466,6 +512,8 @@ export type UserUpdateWithoutPostsInput = {
   classes?: Prisma.UserClassUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   subjects?: Prisma.Teacher_SubjectUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUpdateManyWithoutTeacherNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -478,6 +526,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   classes?: Prisma.UserClassUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   subjects?: Prisma.Teacher_SubjectUncheckedUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutTeacherNestedInput
 }
 
 export type UserCreateWithoutProfileInput = {
@@ -490,6 +540,8 @@ export type UserCreateWithoutProfileInput = {
   classes?: Prisma.UserClassCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutUserInput
   subjects?: Prisma.Teacher_SubjectCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeCreateNestedManyWithoutTeacherInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -502,6 +554,8 @@ export type UserUncheckedCreateWithoutProfileInput = {
   classes?: Prisma.UserClassUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   subjects?: Prisma.Teacher_SubjectUncheckedCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutTeacherInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -530,6 +584,8 @@ export type UserUpdateWithoutProfileInput = {
   classes?: Prisma.UserClassUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   subjects?: Prisma.Teacher_SubjectUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUpdateManyWithoutTeacherNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -542,6 +598,152 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   classes?: Prisma.UserClassUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   subjects?: Prisma.Teacher_SubjectUncheckedUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutTeacherNestedInput
+}
+
+export type UserCreateWithoutStudentGradesInput = {
+  id?: string
+  name: string
+  password?: string
+  email: string
+  role?: string
+  createdAt?: Date | string
+  classes?: Prisma.UserClassCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  subjects?: Prisma.Teacher_SubjectCreateNestedManyWithoutUserInput
+  teacherGrades?: Prisma.Student_GradeCreateNestedManyWithoutTeacherInput
+}
+
+export type UserUncheckedCreateWithoutStudentGradesInput = {
+  id?: string
+  name: string
+  password?: string
+  email: string
+  role?: string
+  createdAt?: Date | string
+  classes?: Prisma.UserClassUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  subjects?: Prisma.Teacher_SubjectUncheckedCreateNestedManyWithoutUserInput
+  teacherGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutTeacherInput
+}
+
+export type UserCreateOrConnectWithoutStudentGradesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStudentGradesInput, Prisma.UserUncheckedCreateWithoutStudentGradesInput>
+}
+
+export type UserCreateWithoutTeacherGradesInput = {
+  id?: string
+  name: string
+  password?: string
+  email: string
+  role?: string
+  createdAt?: Date | string
+  classes?: Prisma.UserClassCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  subjects?: Prisma.Teacher_SubjectCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeCreateNestedManyWithoutStudentInput
+}
+
+export type UserUncheckedCreateWithoutTeacherGradesInput = {
+  id?: string
+  name: string
+  password?: string
+  email: string
+  role?: string
+  createdAt?: Date | string
+  classes?: Prisma.UserClassUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  subjects?: Prisma.Teacher_SubjectUncheckedCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type UserCreateOrConnectWithoutTeacherGradesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutTeacherGradesInput, Prisma.UserUncheckedCreateWithoutTeacherGradesInput>
+}
+
+export type UserUpsertWithoutStudentGradesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStudentGradesInput, Prisma.UserUncheckedUpdateWithoutStudentGradesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStudentGradesInput, Prisma.UserUncheckedCreateWithoutStudentGradesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStudentGradesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStudentGradesInput, Prisma.UserUncheckedUpdateWithoutStudentGradesInput>
+}
+
+export type UserUpdateWithoutStudentGradesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.UserClassUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  subjects?: Prisma.Teacher_SubjectUpdateManyWithoutUserNestedInput
+  teacherGrades?: Prisma.Student_GradeUpdateManyWithoutTeacherNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStudentGradesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.UserClassUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  subjects?: Prisma.Teacher_SubjectUncheckedUpdateManyWithoutUserNestedInput
+  teacherGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutTeacherNestedInput
+}
+
+export type UserUpsertWithoutTeacherGradesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutTeacherGradesInput, Prisma.UserUncheckedUpdateWithoutTeacherGradesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutTeacherGradesInput, Prisma.UserUncheckedCreateWithoutTeacherGradesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutTeacherGradesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutTeacherGradesInput, Prisma.UserUncheckedUpdateWithoutTeacherGradesInput>
+}
+
+export type UserUpdateWithoutTeacherGradesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.UserClassUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  subjects?: Prisma.Teacher_SubjectUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUpdateManyWithoutStudentNestedInput
+}
+
+export type UserUncheckedUpdateWithoutTeacherGradesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  classes?: Prisma.UserClassUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  subjects?: Prisma.Teacher_SubjectUncheckedUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type UserCreateWithoutSubjectsInput = {
@@ -554,6 +756,8 @@ export type UserCreateWithoutSubjectsInput = {
   classes?: Prisma.UserClassCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  studentGrades?: Prisma.Student_GradeCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeCreateNestedManyWithoutTeacherInput
 }
 
 export type UserUncheckedCreateWithoutSubjectsInput = {
@@ -566,6 +770,8 @@ export type UserUncheckedCreateWithoutSubjectsInput = {
   classes?: Prisma.UserClassUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  studentGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutTeacherInput
 }
 
 export type UserCreateOrConnectWithoutSubjectsInput = {
@@ -594,6 +800,8 @@ export type UserUpdateWithoutSubjectsInput = {
   classes?: Prisma.UserClassUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUpdateManyWithoutTeacherNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSubjectsInput = {
@@ -606,6 +814,8 @@ export type UserUncheckedUpdateWithoutSubjectsInput = {
   classes?: Prisma.UserClassUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutTeacherNestedInput
 }
 
 export type UserCreateWithoutClassesInput = {
@@ -618,6 +828,8 @@ export type UserCreateWithoutClassesInput = {
   posts?: Prisma.PostCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
   subjects?: Prisma.Teacher_SubjectCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeCreateNestedManyWithoutTeacherInput
 }
 
 export type UserUncheckedCreateWithoutClassesInput = {
@@ -630,6 +842,8 @@ export type UserUncheckedCreateWithoutClassesInput = {
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
   subjects?: Prisma.Teacher_SubjectUncheckedCreateNestedManyWithoutUserInput
+  studentGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutStudentInput
+  teacherGrades?: Prisma.Student_GradeUncheckedCreateNestedManyWithoutTeacherInput
 }
 
 export type UserCreateOrConnectWithoutClassesInput = {
@@ -658,6 +872,8 @@ export type UserUpdateWithoutClassesInput = {
   posts?: Prisma.PostUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
   subjects?: Prisma.Teacher_SubjectUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUpdateManyWithoutTeacherNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClassesInput = {
@@ -670,6 +886,8 @@ export type UserUncheckedUpdateWithoutClassesInput = {
   posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
   subjects?: Prisma.Teacher_SubjectUncheckedUpdateManyWithoutUserNestedInput
+  studentGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutStudentNestedInput
+  teacherGrades?: Prisma.Student_GradeUncheckedUpdateManyWithoutTeacherNestedInput
 }
 
 
@@ -681,12 +899,16 @@ export type UserCountOutputType = {
   classes: number
   posts: number
   subjects: number
+  studentGrades: number
+  teacherGrades: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   classes?: boolean | UserCountOutputTypeCountClassesArgs
   posts?: boolean | UserCountOutputTypeCountPostsArgs
   subjects?: boolean | UserCountOutputTypeCountSubjectsArgs
+  studentGrades?: boolean | UserCountOutputTypeCountStudentGradesArgs
+  teacherGrades?: boolean | UserCountOutputTypeCountTeacherGradesArgs
 }
 
 /**
@@ -720,6 +942,20 @@ export type UserCountOutputTypeCountSubjectsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.Teacher_SubjectWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStudentGradesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.Student_GradeWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountTeacherGradesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.Student_GradeWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -732,6 +968,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
   subjects?: boolean | Prisma.User$subjectsArgs<ExtArgs>
+  studentGrades?: boolean | Prisma.User$studentGradesArgs<ExtArgs>
+  teacherGrades?: boolean | Prisma.User$teacherGradesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -768,6 +1006,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
   subjects?: boolean | Prisma.User$subjectsArgs<ExtArgs>
+  studentGrades?: boolean | Prisma.User$studentGradesArgs<ExtArgs>
+  teacherGrades?: boolean | Prisma.User$teacherGradesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -780,6 +1020,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     posts: Prisma.$PostPayload<ExtArgs>[]
     profile: Prisma.$ProfilePayload<ExtArgs> | null
     subjects: Prisma.$Teacher_SubjectPayload<ExtArgs>[]
+    studentGrades: Prisma.$Student_GradePayload<ExtArgs>[]
+    teacherGrades: Prisma.$Student_GradePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1186,6 +1428,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   profile<T extends Prisma.User$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$profileArgs<ExtArgs>>): Prisma.Prisma__ProfileClient<runtime.Types.Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   subjects<T extends Prisma.User$subjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Teacher_SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  studentGrades<T extends Prisma.User$studentGradesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$studentGradesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Student_GradePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  teacherGrades<T extends Prisma.User$teacherGradesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teacherGradesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$Student_GradePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1697,6 +1941,54 @@ export type User$subjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.Teacher_SubjectScalarFieldEnum | Prisma.Teacher_SubjectScalarFieldEnum[]
+}
+
+/**
+ * User.studentGrades
+ */
+export type User$studentGradesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Student_Grade
+   */
+  select?: Prisma.Student_GradeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Student_Grade
+   */
+  omit?: Prisma.Student_GradeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.Student_GradeInclude<ExtArgs> | null
+  where?: Prisma.Student_GradeWhereInput
+  orderBy?: Prisma.Student_GradeOrderByWithRelationInput | Prisma.Student_GradeOrderByWithRelationInput[]
+  cursor?: Prisma.Student_GradeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Student_GradeScalarFieldEnum | Prisma.Student_GradeScalarFieldEnum[]
+}
+
+/**
+ * User.teacherGrades
+ */
+export type User$teacherGradesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Student_Grade
+   */
+  select?: Prisma.Student_GradeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Student_Grade
+   */
+  omit?: Prisma.Student_GradeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.Student_GradeInclude<ExtArgs> | null
+  where?: Prisma.Student_GradeWhereInput
+  orderBy?: Prisma.Student_GradeOrderByWithRelationInput | Prisma.Student_GradeOrderByWithRelationInput[]
+  cursor?: Prisma.Student_GradeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Student_GradeScalarFieldEnum | Prisma.Student_GradeScalarFieldEnum[]
 }
 
 /**

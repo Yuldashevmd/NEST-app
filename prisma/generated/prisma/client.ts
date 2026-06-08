@@ -58,6 +58,11 @@ export type Post = Prisma.PostModel
  */
 export type Profile = Prisma.ProfileModel
 /**
+ * Model Student_Grade
+ * 
+ */
+export type Student_Grade = Prisma.Student_GradeModel
+/**
  * Model Subject
  * 
  */

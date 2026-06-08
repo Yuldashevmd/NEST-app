@@ -1,0 +1,15 @@
+model Student_Grade {
+  id              String   @id @default(cuid()) @db.VarChar(50)
+  studentId       String   @db.VarChar(50)
+  class_subjectId String   @db.VarChar(50)
+  teacherId       String   @db.VarChar(50)
+  grade           Float
+  gradeType       String   @db.VarChar(50)
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  student       User          @relation("StudentGrades", fields: [studentId], references: [id])
+  teacher       User          @relation("TeacherGrades", fields: [teacherId], references: [id])
+  class_subject Class_Subject @relation(fields: [class_subjectId], references: [id])
+
+  @@map("student_grades")
+}

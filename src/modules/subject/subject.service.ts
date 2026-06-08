@@ -51,9 +51,11 @@ export class SubjectService {
     return {
       subjects: subs.map((item) => ({
         ...item,
+
         teachers: item.teachers.map((t) => t.user),
         classes: item.classes.map((c) => ({
           ...c.class,
+          class_subjectId: c.id,
           users: c.class.users.map((u) => u.user),
         })),
       })),

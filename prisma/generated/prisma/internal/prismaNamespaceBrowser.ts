@@ -55,6 +55,7 @@ export const ModelName = {
   Class_Subject: 'Class_Subject',
   Post: 'Post',
   Profile: 'Profile',
+  Student_Grade: 'Student_Grade',
   Subject: 'Subject',
   Teacher_Subject: 'Teacher_Subject',
   UserClass: 'UserClass',
@@ -115,6 +116,19 @@ export const ProfileScalarFieldEnum = {
 } as const
 
 export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
+
+
+export const Student_GradeScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  class_subjectId: 'class_subjectId',
+  teacherId: 'teacherId',
+  grade: 'grade',
+  gradeType: 'gradeType',
+  createdAt: 'createdAt'
+} as const
+
+export type Student_GradeScalarFieldEnum = (typeof Student_GradeScalarFieldEnum)[keyof typeof Student_GradeScalarFieldEnum]
 
 
 export const SubjectScalarFieldEnum = {

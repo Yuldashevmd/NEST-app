@@ -388,6 +388,7 @@ export const ModelName = {
   Class_Subject: 'Class_Subject',
   Post: 'Post',
   Profile: 'Profile',
+  Student_Grade: 'Student_Grade',
   Subject: 'Subject',
   Teacher_Subject: 'Teacher_Subject',
   UserClass: 'UserClass',
@@ -407,7 +408,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "class" | "class_Subject" | "post" | "profile" | "subject" | "teacher_Subject" | "userClass" | "user"
+    modelProps: "class" | "class_Subject" | "post" | "profile" | "student_Grade" | "subject" | "teacher_Subject" | "userClass" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -704,6 +705,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProfileCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProfileCountAggregateOutputType> | number
+        }
+      }
+    }
+    Student_Grade: {
+      payload: Prisma.$Student_GradePayload<ExtArgs>
+      fields: Prisma.Student_GradeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.Student_GradeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.Student_GradeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>
+        }
+        findFirst: {
+          args: Prisma.Student_GradeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.Student_GradeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>
+        }
+        findMany: {
+          args: Prisma.Student_GradeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>[]
+        }
+        create: {
+          args: Prisma.Student_GradeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>
+        }
+        createMany: {
+          args: Prisma.Student_GradeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.Student_GradeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>[]
+        }
+        delete: {
+          args: Prisma.Student_GradeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>
+        }
+        update: {
+          args: Prisma.Student_GradeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>
+        }
+        deleteMany: {
+          args: Prisma.Student_GradeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.Student_GradeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.Student_GradeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>[]
+        }
+        upsert: {
+          args: Prisma.Student_GradeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$Student_GradePayload>
+        }
+        aggregate: {
+          args: Prisma.Student_GradeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStudent_Grade>
+        }
+        groupBy: {
+          args: Prisma.Student_GradeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Student_GradeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.Student_GradeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Student_GradeCountAggregateOutputType> | number
         }
       }
     }
@@ -1082,6 +1157,19 @@ export const ProfileScalarFieldEnum = {
 export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
 
 
+export const Student_GradeScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  class_subjectId: 'class_subjectId',
+  teacherId: 'teacherId',
+  grade: 'grade',
+  gradeType: 'gradeType',
+  createdAt: 'createdAt'
+} as const
+
+export type Student_GradeScalarFieldEnum = (typeof Student_GradeScalarFieldEnum)[keyof typeof Student_GradeScalarFieldEnum]
+
+
 export const SubjectScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -1176,6 +1264,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -1291,6 +1393,7 @@ export type GlobalOmitConfig = {
   class_Subject?: Prisma.Class_SubjectOmit
   post?: Prisma.PostOmit
   profile?: Prisma.ProfileOmit
+  student_Grade?: Prisma.Student_GradeOmit
   subject?: Prisma.SubjectOmit
   teacher_Subject?: Prisma.Teacher_SubjectOmit
   userClass?: Prisma.UserClassOmit

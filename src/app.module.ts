@@ -9,6 +9,7 @@ import { ProfileModule } from './modules/profile/profile.module';
 import { UserModule } from './modules/user/user.module';
 import { SubjectModule } from './modules/subject/subject.module';
 import { RolesGuard } from './configs/guards/roles.guard';
+import { GradeModule } from './modules/grade/grade.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { RolesGuard } from './configs/guards/roles.guard';
     PostModule,
     ProfileModule,
     SubjectModule,
+    GradeModule,
   ],
   providers: [
     {
